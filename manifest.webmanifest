@@ -1,7 +1,7 @@
 {
-  "name": "ZirconX Skin Studio — Minecraft Bedrock",
-  "short_name": "ZirconX Studio",
-  "description": "เครื่องมือสร้างและจัดการสกิน Minecraft Bedrock Edition (สกินล่องหน, แอดออนสกินสวมใส่, สกินแพ็กตู้เสื้อผ้า)",
+  "name": "XSKIN Studio — Minecraft Bedrock",
+  "short_name": "XSKIN Studio",
+  "description": "เครื่องมือสร้างและจัดการสกิน Minecraft Bedrock Edition (สกินล่องหน, แอดออนสกินสวมใส่, สกินแพ็กตู้เสื้อผ้า) by ZirconX",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -10,10 +10,16 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "./templates/packicon.png",
-      "sizes": "128x128 256x256 512x512",
+      "src": "./dragon-logo.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "./dragon-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }
