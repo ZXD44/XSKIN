@@ -31,4 +31,5 @@ if ($LASTEXITCODE -ne 0) { Write-Error "Git push failed!"; exit 1 }
 
 Write-Host "`n✅ Deployment pushed successfully!" -ForegroundColor Green
 Write-Host "🌐 GitHub Pages: https://zxd44.github.io/XSKIN/" -ForegroundColor Yellow
+Write-Host "⚡ Vercel Mirror: https://xskin.vercel.app/" -ForegroundColor Yellow
 Write-Host "⚡ Actions CI:   https://github.com/ZXD44/XSKIN/actions" -ForegroundColor Yellow

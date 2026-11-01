@@ -9,6 +9,7 @@
 | ปลายทาง | ชนิด | Branch / Trigger | URL สำหรับเข้าชม |
 |---|---|---|---|
 | **GitHub Pages** (หลัก) | Official Hosting | `main` → GitHub Action (`.github/workflows/deploy.yml`) → `gh-pages` | **https://zxd44.github.io/XSKIN/** |
+| **Vercel** (สำรอง) | Mirror / CDN | Auto-deploy from `main` | **https://xskin.vercel.app** |
 | **GitHub Repository** | Source & Version Control | `origin main` | **https://github.com/ZXD44/XSKIN** |
 | **GitHub Actions Run** | CI/CD Pipeline | Auto-triggered on push to `main` | **https://github.com/ZXD44/XSKIN/actions** |
 

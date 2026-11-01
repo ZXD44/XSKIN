@@ -1,155 +1,107 @@
-# ⛏️ XSKIN Studio — สตูดิโอสกิน Minecraft Bedrock by ZirconX
+# ⛏️ XSKIN Studio
 
-> **เว็บแอปพลิเคชันเครื่องมือสร้างและจัดการสกิน Minecraft Bedrock Edition ครบวงจร**  
-> ดีไซน์ระดับ Impeccable Style รองรับมือถือและ iPad เต็มรูปแบบ (Mobile-First) พรีวิว 3 มิติสด และประมวลผลบนเครื่อง 100% (Pure Client-Side In-Memory) ไม่ต้องพึ่งพาเซิร์ฟเวอร์
+> **สตูดิโอแต่งและแปลงสกิน Minecraft Bedrock ครบจบในที่เดียว**  
+> ใช้งานฟรีบนเว็บ 100% · ปลอดภัย ไม่ส่งไฟล์ขึ้นเซิร์ฟเวอร์ · รองรับทั้งมือถือ ไอแพด และคอมพิวเตอร์
 
-🔗 **ใช้งานออนไลน์ (GitHub Pages)**: [https://zxd44.github.io/XSKIN/](https://zxd44.github.io/XSKIN/)  
-📦 **GitHub Repository**: [https://github.com/ZXD44/XSKIN](https://github.com/ZXD44/XSKIN)
-
----
-
-## ⚡ 4 เครื่องมือหลักในโปรเจกต์ (Studio Workspaces)
-
-1. **🎭 สกินล่องหน (Hide Part Editor)**:
-   - เลือกลบชิ้นส่วนสกินให้โปร่งใสระดับพิกเซล ครอบคลุมทั้ง 2 เลเยอร์ (Inner Base + Outer Hat/Jacket/Sleeves/Pants)
-   - พรีเซ็ตด่วน 1 คลิก: `หัวลอย`, `ล่องหน 100%`, `ถอดแขนขา`, `แค่ตัว`, `ซ่อนหัว`, `ซ่อนตัว`
-   - อัปโหลดสะดวก: คลิกเปิดไฟล์, ลากวาง (พร้อม Scan Beam FX) หรือกด `Ctrl + V` แปะสกินจาก Clipboard ได้ทันที
-
-2. **🦺 แอดออนสกินไอเทมสวมใส่ (Standalone Wearable Skin Addon)**:
-   - แปลงไฟล์สกินเป็นแอดออนชุดเกราะสวมใส่ในเกม (`.mcaddon`)
-   - **Smart Slot Part Sync**: ปรับเลือกชิ้นส่วนสกินให้ตรงกับช่องสวมใส่อัตโนมัติ (หมวก, เสื้อ, กางเกง, รองเท้า) ป้องกันปัญหาเสื้อติดหัวดำ
-   - **ฝัง Humanoid Geometry**: บรรจุโมเดล Steve (แขน 4px) และ Alex (แขน 3px) ครบถ้วน แก้ไขปัญหาจอช่องเก็บของตัวละครเป็นกล่องดำทึบ (Paperdoll Black Box) 100%
-   - **Dynamic Item Icon 16x16**: เจนไอคอนไอเทมในช่องเก็บของจากใบหน้าตัวละครจริง หรืออัปโหลดไอคอนกำหนดเองได้
-
-3. **🚪 สกินแพ็กตู้เสื้อผ้า (Official Bedrock Skin Pack .mcpack)**:
-   - รวมหลายสกินเป็นไฟล์ `.mcpack` เดียว นำเข้า **ห้องแต่งตัว (Dressing Room > Classic Skins)** ของเกมโดยตรง
-   - **3D Live Inspect**: คลิกหมุนดูโมเดล 3D แบบเต็มตัว 360 องศา สลับโมเดล Steve/Alex และทดสอบท่าเดิน/วิ่งก่อนดาวน์โหลด
-
-4. **📖 คู่มือการติดตั้งและใช้งาน (Interactive Guide)**:
-   - แถบนำทางจัดกึ่งกลางสไตล์ Pill (Centered Glassmorphism) รองรับมือถือและแท็บเล็ต
-   - สรุปขั้นตอนติดตั้งไฟล์ `.mcaddon` และ `.mcpack` พร้อมวิธีเปิดใช้งานในโลก (World Settings)
+[![GitHub Pages](https://img.shields.io/badge/Web-GitHub%20Pages-23a55a?style=flat-square&logo=github)](https://zxd44.github.io/XSKIN/)
+[![Vercel Mirror](https://img.shields.io/badge/Mirror-Vercel-black?style=flat-square&logo=vercel)](https://xskin.vercel.app/)
+[![Bedrock](https://img.shields.io/badge/Minecraft-Bedrock%201.21%2B-5865f2?style=flat-square)](https://minecraft.net/)
+[![License](https://img.shields.io/badge/Client--Side-100%25-orange?style=flat-square)](#)
 
 ---
 
-## 📂 แผนผังโครงสร้างโปรเจกต์ (Clean & Beginner-Friendly Directory)
+### 🌐 ลิงก์เข้าใช้งาน
+- 🚀 **เข้าใช้งานเว็บหลัก (GitHub Pages)**: [https://zxd44.github.io/XSKIN/](https://zxd44.github.io/XSKIN/)
+- ⚡ **เว็บสำรอง (Vercel Mirror)**: [https://xskin.vercel.app/](https://xskin.vercel.app/)
+- 📦 **GitHub Repository**: [https://github.com/ZXD44/XSKIN](https://github.com/ZXD44/XSKIN)
+
+---
+
+## ✨ มีอะไรให้เล่นบ้าง?
+
+### 1. 🎭 สกินล่องหน & หัวลอย (Hide Part Editor)
+ไม่ต้องเปิด Photoshop ให้ปวดหัว อยากซ่อนส่วนไหนของสกิน กดจิ้มได้ทันที
+- **พรีเซ็ตสำเร็จรูป 1 คลิก**: `หัวลอย`, `ล่องหนทั้งตัว`, `ถอดแขนขา`, `เหลือแค่ตัว`, `ซ่อนหัว`
+- **เลือกซ่อนทีละชิ้น**: ติ๊กเลือกชิ้นส่วนที่ต้องการ ระบบจะลบให้เนียนทั้งเลเยอร์ในและเลเยอร์นอก
+- **อัปโหลดง่ายสุดๆ**: คลิกเลือกไฟล์, ลากรูปมาวาง หรือกด **Ctrl + V** เพื่อแปะรูปจาก Clipboard ได้ทันที
+
+### 2. 🦺 แปลงสกินเป็นชุดสวมใส่ (.mcaddon)
+เปลี่ยนสกินตัวโปรดให้กลายเป็นชุดเกราะไอเทมในเกม Minecraft Bedrock
+- **สวมใส่ตรงช่องอัตโนมัติ**: เลือกหมวก เสื้อ กางเกง หรือรองเท้า ระบบจะเลือกชิ้นส่วนสกินให้ตรงช่องทันที (บอกลาปัญหาใส่เสื้อแล้วหัวดำ)
+- **แก้ปัญหากล่องดำ 100%**: ฝังโมเดลตัวละครมาตรฐาน (Humanoid Geometry) ทั้งแขน 4px (Steve) และแขน 3px (Alex) หมดปัญหาเปิดช่องเก็บของแล้วตัวละครกลายเป็นกล่องดำ
+- **เจนไอคอนไอเทมสวยงาม**: ตัดรูปหน้าตัวละครขนาด 16×16 พิกเซลไปเป็นไอคอนถือในมือให้อัตโนมัติ
+
+### 3. 🚪 รวมชุดตู้เสื้อผ้า (.mcpack)
+รวมสกินหลายๆ ชุดไว้ในไฟล์เดียว นำเข้า **ห้องแต่งตัว (Dressing Room > Classic Skins)** ของเกมได้โดยตรง
+- **3D Live Inspect**: หมุนดูตัวละครแบบ 3 มิติ 360 องศา สลับโมเดล Steve / Alex และทดสอบท่าเดิน วิ่ง ได้ก่อนกดโหลด
+- **แก้ภาพติดพื้นหลังดำอัตโนมัติ (Smart Alpha)**: ถ้ารูปสกินมีพื้นหลังสีดำทึบ ระบบจะช่วยตัดให้โปร่งใสอัตโนมัติ สกินไม่พังแน่นอน
+
+---
+
+## 💡 ทำไมต้องใช้ XSKIN?
+
+- 🔒 **ปลอดภัย เป็นส่วนตัว 100%**: การตัดต่อรูป การสร้างไฟล์ `.mcaddon` และ `.mcpack` ทั้งหมดเกิดขึ้นบนเบราว์เซอร์ในเครื่องคุณโดยตรง ไม่มีการส่งรูปหรือข้อมูลของคุณขึ้นเซิร์ฟเวอร์
+- 📱 **เล่นบนมือถือได้ลื่นๆ**: หน้าเว็บออกแบบให้ใช้งานด้วยนิ้วสัมผัสบนมือถือและแท็บเล็ตได้ง่าย
+- 📦 **ติดตั้งเป็นแอปได้ (PWA)**: กดปุ่ม **"ติดตั้ง"** เพื่อเพิ่มลงหน้าจอหลัก เปิดใช้งานได้เร็ว และใช้แบบออฟไลน์ได้แม้ไม่มีเน็ต
+- 🎶 **มีเสียงเอฟเฟกต์เพลินๆ**: เสียงคลิกสไตล์เกม Minecraft สังเคราะห์สดผ่าน Web Audio เบาเครื่อง ไม่หนักเน็ต
+
+---
+
+## 🎮 วิธีใช้งานง่ายๆ 3 ขั้นตอน
+
+1. **เลือกเครื่องมือ**: เลือกแท็บด้านบนว่าอยากทำ **สกินล่องหน**, **แอดออนสวมใส่** หรือ **ตู้เสื้อผ้า**
+2. **ใส่รูปสกิน**: ลากไฟล์รูปมาวาง หรือกด Ctrl+V แปะรูป แล้วปรับแต่งตามชอบบนจอ 3D
+3. **ดาวน์โหลดเข้าเกม**: กดปุ่ม **"ดาวน์โหลด"** จะได้ไฟล์ `.mcpack` หรือ `.mcaddon` ดับเบิลคลิกเปิดเข้าเกม Minecraft Bedrock ได้ทันที!
+
+---
+
+## 💻 สำหรับนักพัฒนา (เปิดรันในเครื่อง)
+
+ถ้าต้องการนำโค้ดไปพัฒนาต่อหรือรันบนคอมพิวเตอร์ตัวเอง:
+
+```bash
+# 1. โคลนโปรเจกต์
+git clone https://github.com/ZXD44/XSKIN.git
+cd XSKIN
+
+# 2. ติดตั้งแพ็กเกจ
+npm install
+
+# 3. รันหน้าเว็บทดสอบในเครื่อง
+npm run dev
+```
+
+เปิดเบราว์เซอร์ไปที่ `http://localhost:3000` เพื่อดูผลสดๆ
+
+### คำสั่งอื่นๆ ที่มีประโยชน์
+```bash
+npm test          # รันชุดทดสอบอัตโนมัติ (42/42 tests)
+npm run type-check # ตรวจสอบความถูกต้องของโค้ด
+npm run build      # บิลด์ไฟล์สำหรับขึ้นโฮสต์ (ได้โฟลเดอร์ dist/)
+```
+
+---
+
+## 📁 โครงสร้างโปรเจกต์แบบเข้าใจง่าย
 
 ```
 XSKIN/
-├── public/                       # ไฟล์ Static ที่เบราว์เซอร์เรียกใช้โดยตรง
-│   ├── manifest.webmanifest      # PWA Manifest สำหรับกด "ติดตั้งแอป" ลงหน้าจอมือถือ
-│   ├── sw.js                     # Service Worker แคชไฟล์ในเครื่อง ใช้งานออฟไลน์ได้
-│   ├── templates/                # แม่แบบไฟล์ Minecraft Addon (BP/RP)
-│   └── favicon.svg               # ไอคอนเว็บ
-│
-├── src/                          # โค้ดหลักของโปรเจกต์ทั้งหมด (ทุกไฟล์สั้นกว่า 400 บรรทัด)
-│   ├── config/                   # ⚙️ ค่าคงที่และการตั้งค่าส่วนกลาง (แก้ง่ายที่เดียว)
-│   │   ├── bedrock.config.js     # UUIDs, Bedrock Format Version, รหัสช่องสวมใส่
-│   │   ├── skin.config.js        # พิกัด UV Map, ขนาดความละเอียดที่รองรับ
-│   │   ├── hidepart.config.js    # พรีเซ็ตชิ้นส่วน และการตั้งค่ากล้อง 3D
-│   │   └── archive.config.js     # การจำกัดขนาดไฟล์ SafeZip
-│   │
-│   ├── core/                     # 🧠 Business Logic แท้ (คำนวณอย่างเดียว ไม่มี UI/DOM)
-│   │   ├── addon/                # สร้างไฟล์แอดออน .mcaddon และฝังโมเดล 3D
-│   │   ├── wardrobe/             # สร้างและแตกไฟล์สกินแพ็ก .mcpack
-│   │   ├── skin/                 # ตัวแปลงขนาดสกิน, UV Mapping, ตัดกล่องดำ Smart Alpha
-│   │   ├── validator/            # ตรวจสอบความถูกต้องของโมเดลและไฟล์ JSON ก่อนดาวน์โหลด
-│   │   ├── security/             # ป้องกัน Zip Bomb และ Path Traversal (safeZip.js)
-│   │   └── errors/               # รวมศูนย์ข้อความ Error ภาษาไทยที่เข้าใจง่าย
-│   │
-│   ├── modules/                  # 🖥️ ตัวควบคุมหน้าจอ UI แต่ละส่วน
-│   │   ├── hidepart/             # ซับโมดูลหน้าสกินล่องหน (Events + 3D Viewer)
-│   │   ├── standalone/           # ซับโมดูลหน้าสร้างแอดออน (Events + State + Viewer)
-│   │   ├── wardrobe/             # ซับโมดูลหน้าตู้เสื้อผ้า (3D Inspect Modal)
-│   │   ├── hidepart.js           # ตัวควบคุมหลักหน้าสกินล่องหน
-│   │   ├── standalone.js         # ตัวควบคุมหลักหน้าสร้างแอดออน
-│   │   ├── wardrobe.js           # ตัวควบคุมหลักหน้าตู้เสื้อผ้า
-│   │   ├── sfx.js                # เสียงเอฟเฟกต์ Web Audio API (ไม่ต้องโหลดไฟล์ mp3)
-│   │   ├── mcfire.js             # สะเก็ดไฟพิกเซล Minecraft
-│   │   └── utils.js              # ตัวแจ้งเตือน Toast, ตรวจจับแขน Steve/Alex
-│   │
-│   ├── styles/                   # 🎨 สไตล์ CSS แยกเป็นหมวดหมู่ ค้นหาง่าย
-│   │   ├── variables.css         # โทนสี Obsidian, Emerald, ขนาดขอบมน และ Font Tokens
-│   │   ├── header.css            # แถบเมนูด้านบน, โลโก้, ปุ่มสลับธีม และปุ่มติดตั้ง PWA
-│   │   ├── workbench.css         # จอพรีวิว 3D, กล่อง Live Card, คอนโซลปรับแต่ง
-│   │   ├── hero-editorial.css    # ส่วนหัวเว็บ Hero Showcase
-│   │   ├── guide.css             # แท็บคู่มือการติดตั้งแบบ Pill Centered
-│   │   ├── components.css        # ปุ่ม, Dropzone, กล่อง Toast แจ้งเตือน
-│   │   ├── forms.css             # ช่องกรอกชื่อแอดออน, เช็กบ็อกซ์เลือกชิ้นส่วน
-│   │   └── dock.css              # แถบนำทางด้านล่างหน้าจอสำหรับมือถือ
-│   │
-│   ├── main.js                   # ไฟล์เริ่มต้นระบบ (Event Router, Paste, Global Drop)
-│   └── style.css                 # จุดเชื่อมโยงไฟล์ CSS ทั้งหมดเข้าด้วยกัน
-│
-├── tests/                        # 🧪 ชุดทดสอบอัตโนมัติ (Unit Tests ครบ 42 รายการ)
-├── index.html                    # หน้าเว็บหลัก Single Page Application
-├── package.json                  # รายการ Dependencies และคำสั่งรันโปรเจกต์
-└── vite.config.js                # การตั้งค่า Vite Bundler
+├── public/              # รูปภาพ ไอคอน และ PWA Manifest
+├── src/
+│   ├── config/          # ค่าตั้งต้นต่างๆ เช่น พิกัด UV, รหัสช่องสวมใส่
+│   ├── core/            # ระบบคำนวณหลัก (สร้างไฟล์ .mcaddon / .mcpack / ตัดพื้นหลัง)
+│   ├── modules/         # ระบบควบคุมหน้าจอ UI และการกดปุ่ม
+│   ├── styles/          # ไฟล์ตกแต่ง CSS แยกตามหมวดหมู่
+│   ├── main.js          # จุดเริ่มต้นการทำงานของเว็บ
+│   └── style.css        # ไฟล์รวม CSS ทั้งหมด
+├── tests/               # ชุดทดสอบ Unit Tests
+└── index.html           # หน้าเว็บหลัก
 ```
 
 ---
 
-## 🛠️ คู่มือสำหรับมือใหม่: อยากแก้อะไร ต้องไปที่ไฟล์ไหน?
+## 🤝 ผู้พัฒนาและเครดิต
 
-| สิ่งที่คุณต้องการแก้ไข | ไฟล์ที่ต้องเปิด | คำอธิบายสั้นๆ |
-| :--- | :--- | :--- |
-| **เปลี่ยนสีหลัก / ฟอนต์ / ธีมเว็บ** | `src/styles/variables.css` | รวมตัวแปรสีทั้งหมด เช่น `--blurple`, `--spring`, `--ink-100` |
-| **แก้หน้าตาหรือขนาดปุ่มติดตั้ง PWA** | `src/styles/header.css` | ค้นหาคลาส `.nav-install` |
-| **แก้หน้าตา Dropzone ลากไฟล์** | `src/styles/components.css` | ค้นหาคลาส `.upload-dropzone` |
-| **แก้ขนาดหรือตำแหน่งจอ 3D** | `src/styles/workbench.css` | ค้นหาคลาส `.workbench-canvas-container` |
-| **แก้หรือเพิ่มพรีเซ็ตชิ้นส่วนสกิน** | `src/config/hidepart.config.js` | กำหนดค่า Boolean ใน `HIDEPART_PRESETS` |
-| **แก้เวอร์ชัน Bedrock เริ่มต้น** | `src/config/bedrock.config.js` | ปรับแก้ `MINECRAFT_CONFIG.FORMAT_VERSION` |
-| **แก้ข้อความแจ้งเตือน Error** | `src/core/errors/AppError.js` | ค้นหาข้อความภาษาไทยใน `USER_MESSAGES` |
-| **แก้โครงสร้างปุ่ม/ข้อความบนหน้าเว็บ** | `index.html` | ไฟล์ HTML หน้าหลักของเว็บ |
-
----
-
-## 🚀 วิธีติดตั้งและรันโปรเจกต์ (Step-by-Step Setup)
-
-### สิ่งที่ต้องมีในเครื่อง:
-- [Node.js](https://nodejs.org/) (แนะนำเวอร์ชัน 18 ขึ้นไป)
-
-### 1. ติดตั้ง Dependencies:
-เปิด Terminal หรือ Command Prompt ในโฟลเดอร์โปรเจกต์ แล้วพิมพ์:
-```powershell
-npm install
-```
-
-### 2. รัน Dev Server เพื่อดูผลสดๆ ในเครื่อง:
-```powershell
-npm run dev
-```
-ระบบจะเปิดพอร์ตให้ใช้งาน เช่น `http://localhost:3000/` หรือ `http://localhost:3002/` (เปิดดูผ่านเบราว์เซอร์ได้ทันที และแก้โค้ดจะอัปเดตแบบเรียลไทม์)
-
-### 3. รันการทดสอบระบบ (Automated Tests):
-ตรวจสอบว่าโค้ดยังทำงานถูกต้อง 100% ด้วยคำสั่ง:
-```powershell
-npm test
-```
-*(ระบบจะรัน Unit Tests ครบ 42 ข้อ ในเวลาเพียง 2-3 วินาที)*
-
-### 4. ตรวจสอบชนิดข้อมูล (TypeScript Type-Check):
-```powershell
-npm run type-check
-```
-
-### 5. บิลด์ไฟล์สำเร็จรูปสำหรับขึ้นเซิร์ฟเวอร์ (Production Build):
-```powershell
-npm run build
-```
-*(ไฟล์บิลด์สำเร็จรูปจะถูกสร้างไว้ในโฟลเดอร์ `dist/`)*
-
----
-
-## 🛡️ จุดเด่นด้านสถาปัตยกรรม (Architecture Highlights)
-
-- **Pure Client-Side 100%**: ปลอดภัย มั่นใจได้ ไม่มีการส่งไฟล์สกินขึ้นเซิร์ฟเวอร์ภายนอก ประมวลผลและสร้างไฟล์ ZIP/MCPACK ผ่าน RAM ของเครื่องผู้ใช้โดยตรง
-- **Bedrock Humanoid Geometry Integration**: ฝังโมเดล Steve และ Alex มาตรฐานลงใน Resource Pack แก้ปัญหากล่องดำในช่องเก็บของ (Paperdoll Black Box) 100%
-- **Smart Alpha Inferrer**: ตรวจจับสีพื้นหลังและตัดขอบดำเฉพาะเลเยอร์นอกของไฟล์ภาพ JPG ให้อัตโนมัติ โดยไม่ทำลายเลเยอร์ใน
-- **Universal Auto-Resampler**: ปรับขนาดสกินขนาดอิสระ (เช่น 1452×1452 หรือ 800×800) ลงสู่ 64×64 มาตรฐานอัตโนมัติ
-- **PWA Offline Support**: ใช้งานได้แม้ไม่มีสัญญาณอินเทอร์เน็ต และติดตั้งลงหน้าจอโฮมมือถือได้ง่าย
-
----
-
-## 📄 ลิขสิทธิ์และการพัฒนา
-- พัฒนาโดย **ZirconX Studio** ([www.zirconx.xyz](https://www.zirconx.xyz))
-- ออกแบบสำหรับคอมมูนิตี้ Minecraft Bedrock Edition (MCPE / Windows 10/11 / iOS / Android)
+- สร้างและพัฒนาโดย **ZirconX Studio** ([www.zirconx.xyz](https://www.zirconx.xyz))
+- พัฒนาขึ้นมาเพื่อคอมมูนิตี้คนเล่น Minecraft Bedrock Edition โดยเฉพาะ
+- หากชอบโปรเจกต์นี้ ฝากกด ⭐️ Star บน [GitHub](https://github.com/ZXD44/XSKIN) เพื่อเป็นกำลังใจให้ทีมพัฒนาด้วยนะครับ!
