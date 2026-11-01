@@ -83,7 +83,7 @@
       4. รายงานสรุปผลพร้อม Live URL ทันที
 
 12. **มาตรฐาน Impeccable Style (Anti-AI-Slop Frontend Standard)**:
-    - ปฏิบัติตามหลักการออกแบบใน [`DESIGN.md`](../DESIGN.md) และ [`.agents/skills/impeccable-style/SKILL.md`](skills/impeccable-style/SKILL.md)
+    - ปฏิบัติตามหลักการออกแบบใน [`DESIGN.md`](../docs/DESIGN.md) และ [`.agents/skills/impeccable-style/SKILL.md`](skills/impeccable-style/SKILL.md)
     - แบนการใช้สีม่วงไล่เฉด AI Slop ทั่วไป, ฟอนต์ต้องมีบุคลิกชัดเจนตามธีม Minecraft Obsidian/Emerald, ปุ่มกดต้องมีสัมผัสแบบ Physical Tactile, 60fps micro-animations, และคงมาตรฐานการเข้าถึง WCAG AA/AAA เสมอ
 
 ---

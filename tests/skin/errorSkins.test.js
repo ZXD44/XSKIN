@@ -24,7 +24,7 @@ describe('Error Skins Handling (s1.jpg & s2.png)', () => {
   });
 
   it('correctly detects solid black background and infers alpha for s2.png', () => {
-    const s2Path = path.resolve('error_skins/s2.png');
+    const s2Path = path.resolve(__dirname, '../fixtures/error_skins/s2.png');
     if (!fs.existsSync(s2Path)) return;
 
     const buf = fs.readFileSync(s2Path);

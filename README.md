@@ -86,6 +86,7 @@ npm run build      # บิลด์ไฟล์สำหรับขึ้น�
 
 ```
 XSKIN/
+├── docs/                # เอกสารการออกแบบ (DESIGN.md) และกฎ IDE
 ├── public/              # รูปภาพ ไอคอน และ PWA Manifest
 ├── src/
 │   ├── config/          # ค่าตั้งต้นต่างๆ เช่น พิกัด UV, รหัสช่องสวมใส่
@@ -94,7 +95,7 @@ XSKIN/
 │   ├── styles/          # ไฟล์ตกแต่ง CSS แยกตามหมวดหมู่
 │   ├── main.js          # จุดเริ่มต้นการทำงานของเว็บ
 │   └── style.css        # ไฟล์รวม CSS ทั้งหมด
-├── tests/               # ชุดทดสอบ Unit Tests
+├── tests/               # ชุดทดสอบ Unit Tests และไฟล์ตัวอย่าง (fixtures)
 └── index.html           # หน้าเว็บหลัก
 ```
 
