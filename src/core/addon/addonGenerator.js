@@ -70,8 +70,8 @@ export async function createStandaloneSkinAddon(options) {
   }
 
   const zip = new JSZip();
-  const bpFolder = `${addonName}_ZirconX-SKIN_BP`;
-  const rpFolder = `${addonName}_ZirconX-SKIN_RP`;
+  const bpFolder = `${addonName}_XSKIN_BP`;
+  const rpFolder = `${addonName}_XSKIN_RP`;
 
   // Determine geometry identifier
   let geometryIdentifier = BEDROCK_GEOMETRY_IDS.ALEX;
@@ -116,7 +116,7 @@ export async function createStandaloneSkinAddon(options) {
     format_version: BEDROCK_FORMAT_VERSIONS.MANIFEST,
     header: {
       name: `${addonName} | สกินไอเทม ${addonVersion.join('.')}`,
-      description: 'แอดออนสกินสวมใส่ สร้างโดย ZirconX Skin Project',
+      description: 'แอดออนสกินสวมใส่ สร้างโดย XSKIN Studio',
       min_engine_version: BEDROCK_MIN_ENGINE_VERSION,
       uuid: bpUuid,
       version: addonVersion
@@ -199,7 +199,7 @@ export async function createStandaloneSkinAddon(options) {
     format_version: BEDROCK_FORMAT_VERSIONS.MANIFEST,
     header: {
       name: `${addonName} | สกินไอเทม ${addonVersion.join('.')}`,
-      description: 'แอดออนสกินสวมใส่ สร้างโดย ZirconX Skin Project',
+      description: 'แอดออนสกินสวมใส่ สร้างโดย XSKIN Studio',
       min_engine_version: BEDROCK_MIN_ENGINE_VERSION,
       uuid: rpUuid,
       version: addonVersion
@@ -227,9 +227,9 @@ export async function createStandaloneSkinAddon(options) {
 
   // 7. Localization texts (en_US and th_TH)
   const langLines = [
-    '## ZirconX Skin Project Item Localization',
+    '## XSKIN Studio Item Localization',
     `pack.name=${addonName} | สกินไอเทม ${addonVersion.join('.')}`,
-    'pack.description=แอดออนสกินสวมใส่ สร้างโดย ZirconX Skin Project'
+    'pack.description=แอดออนสกินสวมใส่ สร้างโดย XSKIN Studio'
   ];
 
   for (const item of items) {

@@ -1,6 +1,6 @@
-# 🎨 Workspace Rules for ZirconX Skin Project (MCPE-WEBSKIN)
+# 🎨 Workspace Rules for XSKIN Studio (XSKIN)
 
-> ระบบและกฎการพัฒนาเว็บแอปพลิเคชันเครื่องมือสร้างและจัดการสกิน Minecraft Bedrock Edition (ZirconX Skin Project)
+> ระบบและกฎการพัฒนาเว็บแอปพลิเคชันเครื่องมือสร้างและจัดการสกิน Minecraft Bedrock Edition (XSKIN Studio)
 
 ---
 

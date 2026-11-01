@@ -3,9 +3,8 @@
 > **เว็บแอปพลิเคชันเครื่องมือสร้างและจัดการสกิน Minecraft Bedrock Edition ครบวงจร**  
 > ดีไซน์ระดับ Impeccable Style รองรับมือถือและ iPad เต็มรูปแบบ (Mobile-First) พรีวิว 3 มิติสด และประมวลผลบนเครื่อง 100% (Pure Client-Side In-Memory) ไม่ต้องพึ่งพาเซิร์ฟเวอร์
 
-🔗 **ใช้งานออนไลน์ (Vercel)**: [https://mcpe-webskin.vercel.app/](https://mcpe-webskin.vercel.app/)  
-🔗 **ใช้งานออนไลน์ (GitHub Pages)**: [https://zxd44.github.io/MCPE-WEBSKIN/](https://zxd44.github.io/MCPE-WEBSKIN/)  
-📦 **GitHub Repository**: [https://github.com/ZXD44/MCPE-WEBSKIN](https://github.com/ZXD44/MCPE-WEBSKIN)
+🔗 **ใช้งานออนไลน์ (GitHub Pages)**: [https://zxd44.github.io/XSKIN/](https://zxd44.github.io/XSKIN/)  
+📦 **GitHub Repository**: [https://github.com/ZXD44/XSKIN](https://github.com/ZXD44/XSKIN)
 
 ---
 
@@ -35,7 +34,7 @@
 ## 📂 แผนผังโครงสร้างโปรเจกต์ (Clean & Beginner-Friendly Directory)
 
 ```
-MCPE-WEBSKIN/
+XSKIN/
 ├── public/                       # ไฟล์ Static ที่เบราว์เซอร์เรียกใช้โดยตรง
 │   ├── manifest.webmanifest      # PWA Manifest สำหรับกด "ติดตั้งแอป" ลงหน้าจอมือถือ
 │   ├── sw.js                     # Service Worker แคชไฟล์ในเครื่อง ใช้งานออฟไลน์ได้

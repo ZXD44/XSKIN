@@ -1,6 +1,6 @@
-# 🎨 ZirconX Skin Project System Architecture & Guide (MCPE-WEBSKIN)
+# 🎨 XSKIN Studio System Architecture & Guide (XSKIN)
 
-> **คู่มือระบบและการทำงานทั้งหมดของ ZirconX Skin Project สำหรับ Minecraft Bedrock Edition**  
+> **คู่มือระบบและการทำงานทั้งหมดของ XSKIN Studio สำหรับ Minecraft Bedrock Edition**  
 > ครอบคลุมระบบพรีวิว 3D, การสร้างสกินล่องหน, แอดออนสกินสวมใส่, ระบบตู้เสื้อผ้าเซิร์ฟเวอร์, ระบบแตกไฟล์ ZIP, และ Web Audio SFX
 
 ---

@@ -1,4 +1,4 @@
-# 🚀 Automated Deployment Workflow: ZirconX Skin Studio
+# 🚀 Automated Deployment Workflow: XSKIN Studio
 
 > **คำสั่ง Trigger**: เมื่อผู้ใช้พิมพ์คำว่า `deploy` หรือ `/deploy` ให้เริ่มทำงานตามขั้นตอนในเอกสารนี้ทันทีตั้งแต่ต้นจนจบแบบอัตโนมัติ 100% (Zero Back-and-Forth)
 
@@ -8,10 +8,9 @@
 
 | ปลายทาง | ชนิด | Branch / Trigger | URL สำหรับเข้าชม |
 |---|---|---|---|
-| **GitHub Pages** (หลัก) | Official Hosting | `main` → GitHub Action (`.github/workflows/deploy.yml`) → `gh-pages` | **https://zxd44.github.io/MCPE-WEBSKIN/** |
-| **GitHub Repository** | Source & Version Control | `origin main` | **https://github.com/ZXD44/MCPE-WEBSKIN** |
-| **GitHub Actions Run** | CI/CD Pipeline | Auto-triggered on push to `main` | **https://github.com/ZXD44/MCPE-WEBSKIN/actions** |
-| **Vercel** (สำรอง) | Mirror / Custom Domain | Auto-deploy from `main` | **https://mcpe-webskin.vercel.app** |
+| **GitHub Pages** (หลัก) | Official Hosting | `main` → GitHub Action (`.github/workflows/deploy.yml`) → `gh-pages` | **https://zxd44.github.io/XSKIN/** |
+| **GitHub Repository** | Source & Version Control | `origin main` | **https://github.com/ZXD44/XSKIN** |
+| **GitHub Actions Run** | CI/CD Pipeline | Auto-triggered on push to `main` | **https://github.com/ZXD44/XSKIN/actions** |
 
 ---
 
@@ -70,5 +69,5 @@
 - ✅ Unit Tests Passed (จำนวนข้อสอบ)
 - ✅ Type Check & Build Successful
 - ✅ Git Commit SHA & Message
-- 🔗 ลิงก์สดสำหรับทดสอบ: **https://zxd44.github.io/MCPE-WEBSKIN/**
-- 🔗 ลิงก์ติดตามการรัน GitHub Actions: **https://github.com/ZXD44/MCPE-WEBSKIN/actions**
+- 🔗 ลิงก์สดสำหรับทดสอบ: **https://zxd44.github.io/XSKIN/**
+- 🔗 ลิงก์ติดตามการรัน GitHub Actions: **https://github.com/ZXD44/XSKIN/actions**

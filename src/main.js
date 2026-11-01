@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deferredInstallPrompt.prompt();
         const choiceResult = await deferredInstallPrompt.userChoice;
         if (choiceResult.outcome === 'accepted') {
-          showToast('กำลังติดตั้งแอป ZirconX Studio...', 'success');
+          showToast('กำลังติดตั้งแอป XSKIN Studio...', 'success');
           pwaInstallBtn.style.display = 'none';
         }
         deferredInstallPrompt = null;

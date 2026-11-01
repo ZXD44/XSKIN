@@ -26,8 +26,8 @@ describe('Addon Generator Core (Headless)', () => {
     });
 
     expect(result.zip).toBeDefined();
-    expect(result.bpFolder).toBe('DragonWarrior_ZirconX-SKIN_BP');
-    expect(result.rpFolder).toBe('DragonWarrior_ZirconX-SKIN_RP');
+    expect(result.bpFolder).toBe('DragonWarrior_XSKIN_BP');
+    expect(result.rpFolder).toBe('DragonWarrior_XSKIN_RP');
 
     // 1. Inspect generated files
     const bpManifest = result.zip.file(`${result.bpFolder}/manifest.json`);

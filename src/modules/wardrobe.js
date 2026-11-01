@@ -386,7 +386,7 @@ export class WardrobeMultiEditor {
       showToast('กำลังสร้างสกินแพ็ก (.mcpack)...', 'info');
 
       const generated = await createSkinPack({
-        packName: this.packName || 'ZirconX Skin Pack',
+        packName: this.packName || 'XSKIN Pack',
         version: this.version || [1, 0, 0],
         skins: this.skins
       });
@@ -398,7 +398,7 @@ export class WardrobeMultiEditor {
         return;
       }
 
-      const exported = await downloadMcpackFile(generated.zip, this.packName || 'ZirconX_SkinPack');
+      const exported = await downloadMcpackFile(generated.zip, this.packName || 'XSKIN_SkinPack');
 
       sfx.playLevelUp();
       showToast('✓ ตรวจสอบผ่าน ดาวน์โหลดสกินแพ็ก (.mcpack) เรียบร้อย!', 'success');

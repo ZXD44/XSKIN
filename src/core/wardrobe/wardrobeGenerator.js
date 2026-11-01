@@ -24,9 +24,9 @@ import { BEDROCK_FORMAT_VERSIONS, BEDROCK_GEOMETRY_IDS } from '../../config/bedr
  * @returns {Promise<{ zip: JSZip, packName: string, serializeName: string, skinCount: number, headerUuid: string, moduleUuid: string, outfitCount: number }>}
  */
 export async function createSkinPack(options = {}) {
-  let packName = options.packName || 'ZirconX Skin Pack';
+  let packName = options.packName || 'XSKIN Pack';
   let version = options.version || options.addonVersion || [1, 0, 0];
-  let description = options.description || 'Skin Pack created with ZirconX Skin Studio';
+  let description = options.description || 'Skin Pack created with XSKIN Studio';
   let skins = options.skins || [];
 
   // Legacy wardrobe format adaptation: { wardrobes: [{ name, skinlist: [{ name, action, blob, base64 }] }] }
@@ -55,12 +55,12 @@ export async function createSkinPack(options = {}) {
     throw new AppError(ErrorCode.WARDROBE_EMPTY, null, 'กรุณาเพิ่มสกินอย่างน้อย 1 ชุดก่อนส่งออก');
   }
 
-  const cleanPackName = (packName || 'ZirconX Skin Pack').trim();
+  const cleanPackName = (packName || 'XSKIN Pack').trim();
   const serializeName = (options.packId || cleanPackName)
     .toLowerCase()
     .replace(/[^a-z0-9_]/g, '_')
     .replace(/_+/g, '_')
-    .replace(/^_+|_+$/g, '') || `zx_pack_${generateRandomId(6)}`;
+    .replace(/^_+|_+$/g, '') || `xskin_pack_${generateRandomId(6)}`;
 
   const headerUuid = options.headerUuid || generateUUID();
   const moduleUuid = options.moduleUuid || generateUUID();

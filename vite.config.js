@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(({ command }) => {
   const isVercel = Boolean(process.env.VERCEL);
-  const base = isVercel ? '/' : (command === 'serve' ? '/' : '/MCPE-WEBSKIN/');
+  const base = isVercel ? '/' : (command === 'serve' ? '/' : './');
 
   return {
     base,

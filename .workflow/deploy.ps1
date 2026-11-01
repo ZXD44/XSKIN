@@ -1,4 +1,4 @@
-# PowerShell Automated Deployment Script for ZirconX Skin Studio
+# PowerShell Automated Deployment Script for XSKIN Studio
 param (
   [string]$CommitMessage = "deploy: automatic release build"
 )
@@ -30,5 +30,5 @@ git push origin main
 if ($LASTEXITCODE -ne 0) { Write-Error "Git push failed!"; exit 1 }
 
 Write-Host "`n✅ Deployment pushed successfully!" -ForegroundColor Green
-Write-Host "🌐 GitHub Pages: https://zxd44.github.io/MCPE-WEBSKIN/" -ForegroundColor Yellow
-Write-Host "⚡ Actions CI:   https://github.com/ZXD44/MCPE-WEBSKIN/actions" -ForegroundColor Yellow
+Write-Host "🌐 GitHub Pages: https://zxd44.github.io/XSKIN/" -ForegroundColor Yellow
+Write-Host "⚡ Actions CI:   https://github.com/ZXD44/XSKIN/actions" -ForegroundColor Yellow

@@ -1,5 +1,5 @@
 /**
- * ZirconX Skin Studio - TypeScript Type Definitions
+ * XSKIN Studio - TypeScript Type Definitions
  * Pure Client-Side Minecraft Bedrock Skin & Addon Studio
  */
 
