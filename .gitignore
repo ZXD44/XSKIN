@@ -8,6 +8,8 @@ customer_samples/
 .tmp*
 desktop.ini
 *.log
+tests/*.zip
+tests/ชุด*
 
 # Explicitly track and protect agent rules & documentation
 !.agents/

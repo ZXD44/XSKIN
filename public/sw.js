@@ -9,6 +9,8 @@ const PRECACHE_URLS = [
   './index.html',
   './manifest.webmanifest',
   './templates/packicon.png',
+  './templates/pack_icon.png',
+  './pack_icon.png',
   './dragon-logo.png',
   './dragon-logo.svg'
 ];

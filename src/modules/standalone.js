@@ -353,7 +353,10 @@ export class StandaloneAddonGenerator {
 
       let packIconData = null;
       try {
-        packIconData = await (await fetch(`${import.meta.env.BASE_URL}templates/packicon.png`)).blob();
+        const iconRes = await fetch(`${import.meta.env.BASE_URL}templates/pack_icon.png`);
+        packIconData = iconRes.ok
+          ? await iconRes.blob()
+          : await (await fetch(`${import.meta.env.BASE_URL}templates/packicon.png`)).blob();
       } catch (_) {}
 
       // 1. Generate In-Memory Addon via Headless Core Generator (CORE-001)
