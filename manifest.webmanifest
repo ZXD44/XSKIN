@@ -1,7 +1,7 @@
 {
   "name": "XSKIN Studio — Minecraft Bedrock",
   "short_name": "XSKIN Studio",
-  "description": "เครื่องมือสร้างและจัดการสกิน Minecraft Bedrock Edition (สกินล่องหน, แอดออนสกินสวมใส่, สกินแพ็กตู้เสื้อผ้า) by ZirconX",
+  "description": "เครื่องมือสร้างและจัดการสกิน Minecraft Bedrock Edition (สกินล่องหน, แอดออนสกินสวมใส่, สกินแพ็กตู้เสื้อผ้า) by XSKIN Studio",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
