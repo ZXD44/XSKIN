@@ -6,6 +6,7 @@
 import JSZip from 'jszip';
 import { generateUUID, generateRandomId } from '../../modules/utils.js';
 import { AppError, ErrorCode } from '../errors/AppError.js';
+import { BEDROCK_FORMAT_VERSIONS, BEDROCK_GEOMETRY_IDS } from '../../config/bedrock.config.js';
 
 /**
  * Generate a complete Minecraft Bedrock Skin Pack (.mcpack) in-memory
@@ -68,7 +69,7 @@ export async function createSkinPack(options = {}) {
 
   // 1. manifest.json with module type "skin_pack"
   const manifestJson = {
-    format_version: 2,
+    format_version: BEDROCK_FORMAT_VERSIONS.MANIFEST,
     header: {
       name: cleanPackName,
       description: description,
@@ -109,7 +110,7 @@ export async function createSkinPack(options = {}) {
 
     const textureFileName = `${safeSkinId}.png`;
     const isSlim = s.model === 'alex';
-    const geometry = isSlim ? 'geometry.humanoid.customSlim' : 'geometry.humanoid.custom';
+    const geometry = isSlim ? BEDROCK_GEOMETRY_IDS.ALEX : BEDROCK_GEOMETRY_IDS.STEVE;
 
     skinsJson.skins.push({
       localization_name: safeSkinId,

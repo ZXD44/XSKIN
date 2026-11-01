@@ -2,13 +2,15 @@
  * ZirconX Skin Studio - Service Worker
  * Enables 100% offline usage and home-screen app experience on mobile devices.
  */
-const CACHE_NAME = 'zirconx-studio-v1.5.0';
+const CACHE_NAME = 'zirconx-studio-v1.7.0';
 
 const PRECACHE_URLS = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './templates/packicon.png'
+  './templates/packicon.png',
+  './dragon-logo.png',
+  './dragon-logo.svg'
 ];
 
 // Install Event: Precaches app shell

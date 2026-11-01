@@ -1,12 +1,14 @@
 /**
  * Hide Part Editor (ระบบสร้างสกินล่องหน)
- * Supports 3D Real-time Preview, Steve/Alex Models, One-Click Presets, Direct PNG Download & ZIP/MCPACK Extraction
+ * Clean Architecture Orchestrator
  */
 import { processSkinResolution, detectSlimModel, showToast } from './utils.js';
 import { isZipArchive, extractSkinFromArchive } from './zip.js';
 import { sfx } from './sfx.js';
 import { getPartUVRectangles, applyPartClippingToContext } from '../core/skin/skinProcessor.js';
-import * as skinview3d from 'skinview3d';
+import { HIDEPART_PRESETS } from '../config/hidepart.config.js';
+import { HidepartViewerController } from './hidepart/hidepartViewer.js';
+import { bindHidepartEvents } from './hidepart/hidepartEvents.js';
 
 export class HidePartEditor {
   constructor() {
@@ -18,174 +20,37 @@ export class HidePartEditor {
     this.modelType = 'steve'; // 'steve' (default 4px) or 'alex' (slim 3px)
     this.animMode = 'walk'; // 'walk', 'run', 'idle'
 
-    this.parts = {
-      head: true,
-      body: true,
-      arms: true,
-      legs: true
-    };
+    this.parts = { head: true, body: true, arms: true, legs: true };
 
-    this.viewer = null;
+    this.viewerController = null;
     this.rawInputImg = null;
     this.autofixEnabled = true;
     this.isAlphaInferred = false;
+
     this.init();
   }
 
+  // Getter for backwards compatibility with any external reader
+  get viewer() {
+    return this.viewerController?.viewer;
+  }
+
   init() {
-    // 1. Setup 3D viewer with performance optimization
-    const container = document.getElementById('hidepart-3d-container');
-    const canvasEl = document.getElementById('hidepart-3d-canvas');
-
-    if (container && canvasEl) {
-      this.viewer = new skinview3d.SkinViewer({
-        canvas: canvasEl,
-        width: container.clientWidth || 320,
-        height: 300
-      });
-
-      if (this.viewer.renderer) {
-        this.viewer.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      }
-      this.viewer.camera.position.set(0, 0, 70);
-      this.setAnimation('walk');
-
-      // Pause rendering when hidden to save battery & maintain 60fps
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (this.viewer && this.viewer.animation) {
-            this.viewer.animation.paused = !entry.isIntersecting;
-          }
-        });
-      }, { threshold: 0.1 });
-      observer.observe(container);
-
-      window.addEventListener('resize', () => {
-        if (this.viewer && container.clientWidth) {
-          this.viewer.width = container.clientWidth;
-        }
-      });
-    }
-
-    // 2. Bind file upload input (PNG / ZIP / MCPACK / MCADDON)
-    const fileInput = document.getElementById('hidepart-file-input');
-    if (fileInput) {
-      fileInput.addEventListener('change', (e) => this.handleFileUpload(e));
-    }
-
-    // 3. Bind 4-Part checkboxes
-    ['head', 'body', 'arms', 'legs'].forEach(part => {
-      const checkbox = document.getElementById(`hidepart-${part}`);
-      if (checkbox) {
-        checkbox.addEventListener('change', (e) => {
-          sfx.playClick();
-          this.parts[part] = e.target.checked;
-          const parent = checkbox.closest('.part-toggle-item');
-          if (parent) {
-            parent.classList.toggle('checked', e.target.checked);
-          }
-          this.render();
-        });
-      }
-    });
-
-    // 4. Bind Quick Presets
-    document.querySelectorAll('.hidepart-preset-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        sfx.playClick();
-        const preset = btn.dataset.preset;
-        this.applyPreset(preset);
-      });
-    });
-
-    // 5. 3D Model Switcher (Steve / Alex)
-    document.querySelectorAll('.hidepart-model-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        sfx.playClick();
-        const model = btn.dataset.model; // 'steve' or 'alex'
-        this.setModel(model);
-      });
-    });
-
-    // 6. 3D Animation Switcher (Walk, Run, Idle)
-    document.querySelectorAll('.hidepart-anim-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        sfx.playClick();
-        const anim = btn.dataset.anim;
-        this.setAnimation(anim);
-      });
-    });
-
-    // 7. Reset Camera
-    const resetCam = document.getElementById('hidepart-cam-reset');
-    if (resetCam) {
-      resetCam.addEventListener('click', () => {
-        sfx.playClick();
-        if (this.viewer) {
-          this.viewer.camera.position.set(0, 0, 70);
-          this.viewer.camera.lookAt(0, 0, 0);
-        }
-      });
-    }
-
-    // 8. Autofix Toggle (Smart Alpha Inferrer)
-    const autofixBtn = document.getElementById('hidepart-autofix-btn');
-    if (autofixBtn) {
-      autofixBtn.addEventListener('click', async () => {
-        if (!this.rawInputImg) return;
-        this.autofixEnabled = !this.autofixEnabled;
-        autofixBtn.classList.toggle('disabled', !this.autofixEnabled);
-        const text = autofixBtn.querySelector('.autofix-text');
-        if (text) text.textContent = this.autofixEnabled ? 'ซ่อมกล่องดำ: เปิด' : 'กล่องดำ: สกินเดิม';
-        showToast(this.autofixEnabled ? 'เปิดระบบซ่อมกล่องดำเลเยอร์นอก' : 'ปิดระบบซ่อม: แสดงภาพต้นฉบับ', 'info');
-        await this.loadSkinFromImage(this.rawInputImg, '', { autoInferAlpha: this.autofixEnabled });
-      });
-    }
-
-    // 9. Download Skin PNG
-    const downloadPngBtn = document.getElementById('hidepart-download-png-btn');
-    if (downloadPngBtn) {
-      downloadPngBtn.addEventListener('click', () => this.downloadSkinPng());
-    }
-
-    // Fallback legacy download btn
-    const downloadBtn = document.getElementById('hidepart-download-btn');
-    if (downloadBtn && !downloadPngBtn) {
-      downloadBtn.addEventListener('click', () => this.downloadSkinPng());
-    }
+    this.viewerController = new HidepartViewerController(this);
+    bindHidepartEvents(this);
   }
 
   setModel(model) {
-    this.modelType = model;
-    document.querySelectorAll('.hidepart-model-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.model === model);
-    });
-
-    if (this.viewer && this.currentSkinBlobUrl) {
-      this.viewer.loadSkin(this.currentSkinBlobUrl, {
-        model: this.modelType === 'alex' ? 'slim' : 'default'
-      });
-    }
+    this.viewerController?.setModel(model);
     showToast(`สลับโมเดลเป็น ${model === 'alex' ? 'Alex (แขน 3px)' : 'Steve (แขน 4px)'}`, 'info');
   }
 
   setAnimation(anim) {
-    this.animMode = anim;
-    document.querySelectorAll('.hidepart-anim-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.anim === anim);
-    });
+    this.viewerController?.setAnimation(anim);
+  }
 
-    if (!this.viewer) return;
-
-    if (anim === 'walk') {
-      this.viewer.animation = new skinview3d.WalkingAnimation();
-      this.viewer.animation.speed = 0.6;
-    } else if (anim === 'run') {
-      this.viewer.animation = new skinview3d.RunningAnimation();
-      this.viewer.animation.speed = 0.8;
-    } else {
-      this.viewer.animation = null;
-    }
+  resetCamera() {
+    this.viewerController?.resetCamera();
   }
 
   getPartRectangles() {
@@ -198,35 +63,13 @@ export class HidePartEditor {
       return;
     }
 
-    switch (preset) {
-      case 'all':
-        this.parts = { head: true, body: true, arms: true, legs: true };
-        break;
-      case 'head-only':
-        // หัวลอย (Floating Head)
-        this.parts = { head: true, body: false, arms: false, legs: false };
-        break;
-      case 'hide-all':
-        // ล่องหน 100% (Invisible All)
-        this.parts = { head: false, body: false, arms: false, legs: false };
-        break;
-      case 'hide-arms-legs':
-        // ถอดแขนขา (Armless & Legless)
-        this.parts = { head: true, body: true, arms: false, legs: false };
-        break;
-      case 'body-only':
-        this.parts = { head: false, body: true, arms: false, legs: false };
-        break;
-      case 'hide-head':
-        this.parts = { head: false, body: true, arms: true, legs: true };
-        break;
-      case 'hide-body':
-        this.parts = { head: true, body: false, arms: true, legs: true };
-        break;
+    const presetConfig = HIDEPART_PRESETS[preset];
+    if (presetConfig) {
+      this.parts = { ...presetConfig };
     }
 
     // Sync Checkboxes
-    ['head', 'body', 'arms', 'legs'].forEach(p => {
+    ['head', 'body', 'arms', 'legs'].forEach((p) => {
       const cb = document.getElementById(`hidepart-${p}`);
       if (cb) cb.checked = this.parts[p];
       const parent = cb?.closest('.part-toggle-item');
@@ -238,14 +81,16 @@ export class HidePartEditor {
   }
 
   async handleFileUpload(e) {
-    const file = e.target ? e.target.files[0] : e;
+    const file = e.target?.files ? e.target.files[0] : (e.target ? null : e);
     if (!file) return;
     await this.loadFile(file);
+    if (e.target?.value !== undefined) {
+      e.target.value = '';
+    }
   }
 
   async loadFile(file) {
     try {
-      // Check if uploaded file is a ZIP / MCPACK / MCADDON
       if (await isZipArchive(file)) {
         showToast('กำลังแตกไฟล์ ZIP / แอดออน...', 'info');
         const extracted = await extractSkinFromArchive(file);
@@ -253,7 +98,6 @@ export class HidePartEditor {
         return;
       }
 
-      // Standard PNG file
       const reader = new FileReader();
       reader.onload = async (event) => {
         const rawImg = new Image();
@@ -280,8 +124,10 @@ export class HidePartEditor {
       this.resolution = processedImg.width;
       this.isAlphaInferred = !!processedImg._wasAlphaInferred;
 
-      this.canvas.width = this.resolution;
-      this.canvas.height = this.resolution;
+      if (this.canvas) {
+        this.canvas.width = this.resolution;
+        this.canvas.height = this.resolution;
+      }
 
       // Update resolution badge in DOM
       const resBadge = document.getElementById('hidepart-res-badge');
@@ -306,12 +152,12 @@ export class HidePartEditor {
       // Auto-detect Alex (slim 3px) vs Steve (default 4px)
       const isSlim = detectSlimModel(processedImg);
       this.modelType = isSlim ? 'alex' : 'steve';
-      document.querySelectorAll('.hidepart-model-btn').forEach(btn => {
+      document.querySelectorAll('.hidepart-model-btn').forEach((btn) => {
         btn.classList.toggle('active', btn.dataset.model === this.modelType);
       });
 
       // Reset parts to visible
-      ['head', 'body', 'arms', 'legs'].forEach(part => {
+      ['head', 'body', 'arms', 'legs'].forEach((part) => {
         this.parts[part] = true;
         const cb = document.getElementById(`hidepart-${part}`);
         if (cb) cb.checked = true;
@@ -325,14 +171,10 @@ export class HidePartEditor {
         workArea.style.display = 'block';
       }
 
-      // Auto-resize 3D viewer
-      const container = document.getElementById('hidepart-3d-container');
-      if (this.viewer && container) {
-        this.viewer.width = container.clientWidth || 320;
-      }
-
+      this.viewerController?.resize();
       this.render();
       sfx.playPop();
+
       if (processedImg._wasResized) {
         showToast(`ปรับขนาดสกินจาก ${processedImg._origW}x${processedImg._origH} เป็น ${this.resolution}x${this.resolution} อัตโนมัติ`, 'info');
       }
@@ -346,7 +188,7 @@ export class HidePartEditor {
   }
 
   render() {
-    if (!this.originalImg.src) return;
+    if (!this.originalImg.src || !this.ctx || !this.canvas) return;
 
     this.ctx.clearRect(0, 0, this.resolution, this.resolution);
     this.ctx.imageSmoothingEnabled = false;
@@ -356,16 +198,12 @@ export class HidePartEditor {
     applyPartClippingToContext(this.ctx, this.resolution, this.parts);
 
     // Update 3D viewer & Blob URL with transparent cutouts
-    this.canvas.toBlob(blob => {
+    this.canvas.toBlob((blob) => {
       if (!blob) return;
       if (this.currentSkinBlobUrl) URL.revokeObjectURL(this.currentSkinBlobUrl);
       this.currentSkinBlobUrl = URL.createObjectURL(blob);
 
-      if (this.viewer) {
-        this.viewer.loadSkin(this.currentSkinBlobUrl, {
-          model: this.modelType === 'alex' ? 'slim' : 'default'
-        });
-      }
+      this.viewerController?.loadSkin(this.currentSkinBlobUrl, this.modelType === 'alex');
     }, 'image/png');
   }
 

@@ -173,6 +173,7 @@ export async function downloadMcaddonFile(zip, rawFilename) {
   }
 
   saveAs(fileToSave, fileName);
+  return { blob, fileName };
 }
 
 /**
@@ -205,6 +206,68 @@ export async function downloadMcpackFile(zip, rawFilename) {
   }
 
   saveAs(fileToSave, fileName);
+  return { blob, fileName };
+}
+
+/**
+ * Save an already-built archive through the File System Access API so the user
+ * can confirm the exact filename (guarantees no browser-appended .zip).
+ * Returns false when unsupported or when the write failed, so callers can fall
+ * back to the classic download.
+ * @param {Blob} blob
+ * @param {string} fileName
+ */
+export async function saveArchiveWithPicker(blob, fileName) {
+  if (typeof window.showSaveFilePicker !== 'function') return false;
+
+  const extension = fileName.slice(fileName.lastIndexOf('.'));
+  try {
+    const handle = await window.showSaveFilePicker({
+      suggestedName: fileName,
+      types: [{
+        description: 'Minecraft Bedrock package',
+        accept: { 'application/octet-stream': [extension] }
+      }]
+    });
+    const writable = await handle.createWritable();
+    await writable.write(blob);
+    await writable.close();
+    return true;
+  } catch (err) {
+    // A user cancel is not a failure we need to report.
+    if (err && err.name === 'AbortError') return true;
+    return false;
+  }
+}
+
+/**
+ * Hand the finished package to the native share sheet (iOS lets the user send
+ * the file straight into Minecraft). Returns true when the share sheet opened.
+ * @param {Blob} blob
+ * @param {string} fileName
+ * @param {string} title
+ */
+export async function shareArchive(blob, fileName, title) {
+  if (typeof navigator.share !== 'function' || typeof File === 'undefined') return false;
+
+  let file;
+  try {
+    file = new File([blob], fileName, { type: 'application/octet-stream' });
+  } catch (_) {
+    return false;
+  }
+
+  if (typeof navigator.canShare === 'function' && !navigator.canShare({ files: [file] })) {
+    return false;
+  }
+
+  try {
+    await navigator.share({ files: [file], title: title || fileName });
+    return true;
+  } catch (err) {
+    if (err && err.name === 'AbortError') return true;
+    return false;
+  }
 }
 
 /**

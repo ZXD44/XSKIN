@@ -1,33 +1,60 @@
 /* ==========================================================================
-   MAIN CONTENT LAYOUT & PAGE SECTIONS — MINECRAFT BEDROCK EDITION
+   APP VIEWPORT & PAGE TRANSITIONS — DISCORD STAGE ARCHITECTURE
+   Specification: Web-ND/DESIGN.md
    ========================================================================== */
+
+.app-viewport {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--surface-cosmic-page);
+}
+
 .main-content {
   flex: 1;
-  padding: 1.1rem 0.9rem;
+  padding: 2.25rem 2.5rem 4rem 2.5rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1024px) {
   .main-content {
-    padding: 0.85rem 0.65rem;
+    padding: 1.75rem 1.75rem 4rem 1.75rem;
   }
 }
 
-@media (min-width: 821px) {
+@media (max-width: 860px) {
   .main-content {
-    padding: 2rem 1.75rem;
+    padding: 1.25rem 1rem calc(var(--bottom-dock-height) + 2rem) 1rem;
   }
 }
 
+/* Page Section Switching Animations */
 .page-section {
   display: none;
-  animation: mcPageFadeIn 0.2s ease-out;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--motion-normal), transform var(--motion-normal);
 }
 
 .page-section.active {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: stageEnter 320ms var(--motion-ease) forwards;
 }
 
-@keyframes mcPageFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes stageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -1,0 +1,224 @@
+/* ==========================================================================
+   WORKSPACE SHOWCASE — tonal stages, one accent per card
+   No rainbow gradients: every card is obsidian, lit by a single colour.
+   ========================================================================== */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.work-card {
+  position: relative;
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 250px;
+  padding: 24px 22px 18px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(168deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.012) 38%, transparent 100%),
+    var(--ink-100);
+  text-align: left;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 320ms var(--ease), border-color 320ms var(--ease), box-shadow 320ms var(--ease);
+}
+
+[data-theme='light'] .work-card {
+  background:
+    linear-gradient(168deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%),
+    #ffffff;
+  box-shadow: var(--shadow-1);
+}
+
+.work-card.is-wide {
+  grid-column: span 7;
+}
+
+.work-card.is-narrow {
+  grid-column: span 5;
+}
+
+.work-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-2);
+}
+
+.work-card:active {
+  transform: translateY(0);
+}
+
+/* Accent glow — the only colour on the card */
+.work-card-glow {
+  position: absolute;
+  z-index: -1;
+  top: -120px;
+  right: -70px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: var(--accent, var(--blurple));
+  filter: blur(80px);
+  opacity: 0.16;
+  transition: opacity 420ms var(--ease), transform 420ms var(--ease);
+  pointer-events: none;
+}
+
+.work-card:hover .work-card-glow {
+  opacity: 0.3;
+  transform: scale(1.08);
+}
+
+.accent-blurple { --accent: #5865f2; }
+.accent-cerulean { --accent: #00b0f4; }
+.accent-emerald { --accent: #57f287; }
+.accent-amber { --accent: #fda220; }
+.accent-slate { --accent: #8891f2; }
+
+/* Ghost numeral as texture */
+.work-card-index {
+  position: absolute;
+  right: 14px;
+  bottom: 6px;
+  font-family: var(--font-display);
+  font-size: 108px;
+  line-height: 0.8;
+  letter-spacing: 0.02em;
+  color: var(--text-hi);
+  opacity: 0.035;
+  pointer-events: none;
+  transition: opacity 320ms var(--ease);
+}
+
+.work-card:hover .work-card-index {
+  opacity: 0.06;
+}
+
+.work-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.work-card-badge {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.work-card-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--accent, var(--blurple));
+  transition: background 320ms var(--ease), transform 320ms var(--ease);
+}
+
+.work-card:hover .work-card-icon {
+  background: color-mix(in srgb, var(--accent, var(--blurple)) 16%, transparent);
+  transform: translateY(-1px);
+}
+
+.work-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 0.94;
+  letter-spacing: 0.012em;
+  text-transform: uppercase;
+  color: var(--text-hi);
+  margin-top: 2px;
+}
+
+.work-card.is-wide .work-card-title {
+  font-size: clamp(32px, 3.6vw, 46px);
+}
+
+.work-card-desc {
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: var(--text-low);
+  max-width: 48ch;
+}
+
+.work-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.work-card-tags .tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-low);
+}
+
+.work-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  color: var(--text-hi);
+}
+
+.work-card-cta svg {
+  color: var(--text-low);
+  transition: transform 320ms var(--ease), color 320ms var(--ease);
+}
+
+.work-card:hover .work-card-cta svg {
+  transform: translateX(4px);
+  color: var(--accent, var(--blurple));
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+  .work-card,
+  .work-card.is-wide,
+  .work-card.is-narrow {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 760px) {
+  .work-card,
+  .work-card.is-wide,
+  .work-card.is-narrow {
+    grid-column: span 12;
+    min-height: 0;
+  }
+
+  .work-card-index {
+    font-size: 84px;
+  }
+}

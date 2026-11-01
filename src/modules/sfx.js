@@ -1,6 +1,7 @@
 /**
  * Minecraft Sound Effects Engine (Pure Web Audio API)
- * Synthesizes authentic Minecraft UI sounds without requiring external audio files.
+ * Synthesizes authentic Minecraft 8-bit / 16-bit sound effects (Pixel Art Red Dragon Theme)
+ * 100% Zero-Dependency Audio
  */
 
 class MinecraftSFX {
@@ -35,7 +36,7 @@ class MinecraftSFX {
   }
 
   /**
-   * Minecraft UI Button Click Sound
+   * Crisp 8-bit Tactile Button Click Sound
    */
   playClick() {
     if (this.muted) return;
@@ -59,13 +60,67 @@ class MinecraftSFX {
 
       osc.start(t);
       osc.stop(t + 0.045);
-    } catch (e) {
-      // AudioContext policy suppression fallback
-    }
+    } catch (_) {}
   }
 
   /**
-   * Minecraft Item Pop / Equip Sound (When skin/file is loaded)
+   * Subtle 8-bit Hover Blip
+   */
+  playHover() {
+    if (this.muted) return;
+    const ctx = this.getAudioContext();
+    if (!ctx) return;
+
+    try {
+      const t = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(980, t);
+      osc.frequency.exponentialRampToValueAtTime(1240, t + 0.025);
+
+      gain.gain.setValueAtTime(0.04, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.025);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.025);
+    } catch (_) {}
+  }
+
+  /**
+   * Holographic UV Beacon Scan Chirp (on drop/upload)
+   */
+  playScan() {
+    if (this.muted) return;
+    const ctx = this.getAudioContext();
+    if (!ctx) return;
+
+    try {
+      const t = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(440, t);
+      osc.frequency.exponentialRampToValueAtTime(1760, t + 0.12);
+
+      gain.gain.setValueAtTime(0.12, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.14);
+    } catch (_) {}
+  }
+
+  /**
+   * Minecraft Item Pop / Equip Sound
    */
   playPop() {
     if (this.muted) return;
@@ -89,11 +144,11 @@ class MinecraftSFX {
 
       osc.start(t);
       osc.stop(t + 0.08);
-    } catch (e) {}
+    } catch (_) {}
   }
 
   /**
-   * Minecraft Level Up / Complete Chime (When addon or PNG is downloaded)
+   * Pixel Art Red Dragon Chime / Level Up Sound (Export success)
    */
   playLevelUp() {
     if (this.muted) return;
@@ -102,27 +157,27 @@ class MinecraftSFX {
 
     try {
       const t = ctx.currentTime;
-      // Minecraft harmonic chord: C5 -> E5 -> G5 -> C6
-      const notes = [523.25, 659.25, 783.99, 1046.50];
+      // Harmonic 16-bit chiptune arpeggio
+      const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
 
       notes.forEach((freq, i) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        const noteTime = t + (i * 0.08);
+        const noteTime = t + (i * 0.07);
 
-        osc.type = 'triangle';
+        osc.type = i === notes.length - 1 ? 'square' : 'triangle';
         osc.frequency.setValueAtTime(freq, noteTime);
 
-        gain.gain.setValueAtTime(0.2, noteTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.35);
+        gain.gain.setValueAtTime(0.18, noteTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.38);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
 
         osc.start(noteTime);
-        osc.stop(noteTime + 0.36);
+        osc.stop(noteTime + 0.4);
       });
-    } catch (e) {}
+    } catch (_) {}
   }
 }
 

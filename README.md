@@ -1,137 +1,156 @@
-# ⛏️ ZirconX Skin Studio (Minecraft Bedrock Edition)
+# ⛏️ XSKIN Studio — สตูดิโอสกิน Minecraft Bedrock by ZirconX
 
 > **เว็บแอปพลิเคชันเครื่องมือสร้างและจัดการสกิน Minecraft Bedrock Edition ครบวงจร**  
-> ดีไซน์ธีม Minecraft UI แท้ รองรับมือถือเต็มรูปแบบ (Mobile-First) พรีวิว 3 มิติสด และประมวลผลบนเครื่อง 100% (Pure Client-Side In-Memory)
+> ดีไซน์ระดับ Impeccable Style รองรับมือถือและ iPad เต็มรูปแบบ (Mobile-First) พรีวิว 3 มิติสด และประมวลผลบนเครื่อง 100% (Pure Client-Side In-Memory) ไม่ต้องพึ่งพาเซิร์ฟเวอร์
 
 🔗 **ใช้งานออนไลน์ (Vercel)**: [https://mcpe-webskin.vercel.app/](https://mcpe-webskin.vercel.app/)  
 🔗 **ใช้งานออนไลน์ (GitHub Pages)**: [https://zxd44.github.io/MCPE-WEBSKIN/](https://zxd44.github.io/MCPE-WEBSKIN/)  
-📦 **Repository**: [https://github.com/ZXD44/MCPE-WEBSKIN](https://github.com/ZXD44/MCPE-WEBSKIN)
+📦 **GitHub Repository**: [https://github.com/ZXD44/MCPE-WEBSKIN](https://github.com/ZXD44/MCPE-WEBSKIN)
 
 ---
 
-## ⚡ 4 เครื่องมือหลัก (The Studio Artifacts)
+## ⚡ 4 เครื่องมือหลักในโปรเจกต์ (Studio Workspaces)
 
 1. **🎭 สกินล่องหน (Hide Part Editor)**:
-   - เลือกลบชิ้นส่วนสกินให้โปร่งใสระดับพิกเซล ครอบคลุมทั้งเลเยอร์ในและเลเยอร์นอก (Inner Base + Outer Hat/Jacket/Sleeves/Pants)
+   - เลือกลบชิ้นส่วนสกินให้โปร่งใสระดับพิกเซล ครอบคลุมทั้ง 2 เลเยอร์ (Inner Base + Outer Hat/Jacket/Sleeves/Pants)
    - พรีเซ็ตด่วน 1 คลิก: `หัวลอย`, `ล่องหน 100%`, `ถอดแขนขา`, `แค่ตัว`, `ซ่อนหัว`, `ซ่อนตัว`
-   - พรีวิว 3 มิติเรียลไทม์ และดาวน์โหลดไฟล์ภาพ `.png` นำไปใส่ในเกมได้ทันที
+   - อัปโหลดสะดวก: คลิกเปิดไฟล์, ลากวาง (พร้อม Scan Beam FX) หรือกด `Ctrl + V` แปะสกินจาก Clipboard ได้ทันที
 
-2. **🦺 แอดออนสกินไอเทม & 3D เสริม (Standalone Addon & 3D Cosmetics)**:
-   - แปลงสกินเป็นชุดเกราะสวมใส่ในเกม (ช่องหัว, ช่องตัว, ช่องขา, ช่องเท้า, หรือแยก 2 ชิ้น)
-   - **✨ อุปกรณ์ 3D เสริม (3D Cosmetics Studio)**:
-     - เพิ่มชิ้นส่วน 3D สำเร็จรูป: 🐱 **หูแมว 3D**, 🪽 **ปีกมังกร**, 🦊 **หางจิ้งจอก**, 👑 **มงกุฎลอย**, 🎒 **กระเป๋าเป้**
-     - เลือกระบบสีเอง หรือดูดสีสกินอัตโนมัติ (Auto-Color Sampling)
-     - เรนเดอร์ชิ้นส่วน 3D เคลื่อนไหวตามท่าทางเดิน/วิ่งบนเบราว์เซอร์สดๆ ด้วย Three.js
-   - **📁 Blockbench Bridge (.geo.json)**:
-     - นำเข้าโมเดล Bedrock Geometry ที่ออกแบบจากโปรแกรม Blockbench โดยตรง
-     - ผูกกระดูกและแปลงเป็นแอดออนสวมใส่ในเกมอัตโนมัติ 100% ไร้โค้ด JSON
-   - **ระบบเจนไอคอนไอเทมตามรูปลักษณ์ช่องสวมใส่จริง (Slot-Based Item Icon)**:
-     - ช่องหัว (`slot.armor.head`): เจนไอคอนเฉพาะส่วนหัว (+ ปอยผม/ลำตัวถ้าเปิดเรนเดอร์)
-     - ช่องตัว (`slot.armor.chest`): เจนไอคอนเฉพาะเสื้อและแขน
-     - ช่องกางเกง (`slot.armor.legs`): เจนไอคอนเฉพาะช่วงกางเกง/เอว
-     - ช่องรองเท้า (`slot.armor.feet`): เจนไอคอนเฉพาะรองเท้าบูท
-     - หากสกินไม่มีพิกเซลในช่องที่เลือก ตัวไอคอนจะโปร่งใสอัตโนมัติ ไม่แสดงผิดส่วน
-   - รองรับวิกผมยาว/ปอยผมพาดลำตัว โดยใช้ Custom Render Controller (`controller.render.zirconx_skin`)
-   - ซ่อนโมเดลขณะถือในมือด้วยสเกล `1e-5` ใน attachable
-   - แปลงสกินเก่า 64x32 เป็น 64x64 พร้อม UV Mirroring อัตโนมัติ
+2. **🦺 แอดออนสกินไอเทมสวมใส่ (Standalone Wearable Skin Addon)**:
+   - แปลงไฟล์สกินเป็นแอดออนชุดเกราะสวมใส่ในเกม (`.mcaddon`)
+   - **Smart Slot Part Sync**: ปรับเลือกชิ้นส่วนสกินให้ตรงกับช่องสวมใส่อัตโนมัติ (หมวก, เสื้อ, กางเกง, รองเท้า) ป้องกันปัญหาเสื้อติดหัวดำ
+   - **ฝัง Humanoid Geometry**: บรรจุโมเดล Steve (แขน 4px) และ Alex (แขน 3px) ครบถ้วน แก้ไขปัญหาจอช่องเก็บของตัวละครเป็นกล่องดำทึบ (Paperdoll Black Box) 100%
+   - **Dynamic Item Icon 16x16**: เจนไอคอนไอเทมในช่องเก็บของจากใบหน้าตัวละครจริง หรืออัปโหลดไอคอนกำหนดเองได้
 
 3. **🚪 สกินแพ็กตู้เสื้อผ้า (Official Bedrock Skin Pack .mcpack)**:
-   - รวมหลายสกินเป็นแพ็กเกจเดียว นำเข้า **ห้องแต่งตัว (Dressing Room &gt; Classic Skins)** ของเกมโดยตรง
-   - **3D Live Inspect**: คลิกรูปหรือปุ่ม 3D เพื่อหมุนดูโมเดล 3D แบบเต็มตัว 360 องศา สลับแขน Steve/Alex และทดสอบท่าเดิน/วิ่งก่อนส่งออก
-   - นำเข้าไฟล์ `.mcpack` หรือ `.zip` เดิมเข้ามาแก้ไข เปลี่ยนชื่อ และจัดเรียงสกินใหม่ได้ทันที
+   - รวมหลายสกินเป็นไฟล์ `.mcpack` เดียว นำเข้า **ห้องแต่งตัว (Dressing Room > Classic Skins)** ของเกมโดยตรง
+   - **3D Live Inspect**: คลิกหมุนดูโมเดล 3D แบบเต็มตัว 360 องศา สลับโมเดล Steve/Alex และทดสอบท่าเดิน/วิ่งก่อนดาวน์โหลด
 
-4. **📖 คู่มือและการใช้งาน (Interactive Guide)**:
-   - แยกหมวดหมู่ 3 แท็บ: **วิธีติดตั้ง** (ขั้นตอนกระชับ 2 สเต็ป), **สกินตรงปก** (Do & Don't เปรียบเทียบภาพที่แนะนำและควรเลี่ยง), และ **ประวัติอัปเดต** (ไทม์ไลน์เวอร์ชันคลีนตา)
+4. **📖 คู่มือการติดตั้งและใช้งาน (Interactive Guide)**:
+   - แถบนำทางจัดกึ่งกลางสไตล์ Pill (Centered Glassmorphism) รองรับมือถือและแท็บเล็ต
+   - สรุปขั้นตอนติดตั้งไฟล์ `.mcaddon` และ `.mcpack` พร้อมวิธีเปิดใช้งานในโลก (World Settings)
+
+---
+
+## 📂 แผนผังโครงสร้างโปรเจกต์ (Clean & Beginner-Friendly Directory)
+
+```
+MCPE-WEBSKIN/
+├── public/                       # ไฟล์ Static ที่เบราว์เซอร์เรียกใช้โดยตรง
+│   ├── manifest.webmanifest      # PWA Manifest สำหรับกด "ติดตั้งแอป" ลงหน้าจอมือถือ
+│   ├── sw.js                     # Service Worker แคชไฟล์ในเครื่อง ใช้งานออฟไลน์ได้
+│   ├── templates/                # แม่แบบไฟล์ Minecraft Addon (BP/RP)
+│   └── favicon.svg               # ไอคอนเว็บ
+│
+├── src/                          # โค้ดหลักของโปรเจกต์ทั้งหมด (ทุกไฟล์สั้นกว่า 400 บรรทัด)
+│   ├── config/                   # ⚙️ ค่าคงที่และการตั้งค่าส่วนกลาง (แก้ง่ายที่เดียว)
+│   │   ├── bedrock.config.js     # UUIDs, Bedrock Format Version, รหัสช่องสวมใส่
+│   │   ├── skin.config.js        # พิกัด UV Map, ขนาดความละเอียดที่รองรับ
+│   │   ├── hidepart.config.js    # พรีเซ็ตชิ้นส่วน และการตั้งค่ากล้อง 3D
+│   │   └── archive.config.js     # การจำกัดขนาดไฟล์ SafeZip
+│   │
+│   ├── core/                     # 🧠 Business Logic แท้ (คำนวณอย่างเดียว ไม่มี UI/DOM)
+│   │   ├── addon/                # สร้างไฟล์แอดออน .mcaddon และฝังโมเดล 3D
+│   │   ├── wardrobe/             # สร้างและแตกไฟล์สกินแพ็ก .mcpack
+│   │   ├── skin/                 # ตัวแปลงขนาดสกิน, UV Mapping, ตัดกล่องดำ Smart Alpha
+│   │   ├── validator/            # ตรวจสอบความถูกต้องของโมเดลและไฟล์ JSON ก่อนดาวน์โหลด
+│   │   ├── security/             # ป้องกัน Zip Bomb และ Path Traversal (safeZip.js)
+│   │   └── errors/               # รวมศูนย์ข้อความ Error ภาษาไทยที่เข้าใจง่าย
+│   │
+│   ├── modules/                  # 🖥️ ตัวควบคุมหน้าจอ UI แต่ละส่วน
+│   │   ├── hidepart/             # ซับโมดูลหน้าสกินล่องหน (Events + 3D Viewer)
+│   │   ├── standalone/           # ซับโมดูลหน้าสร้างแอดออน (Events + State + Viewer)
+│   │   ├── wardrobe/             # ซับโมดูลหน้าตู้เสื้อผ้า (3D Inspect Modal)
+│   │   ├── hidepart.js           # ตัวควบคุมหลักหน้าสกินล่องหน
+│   │   ├── standalone.js         # ตัวควบคุมหลักหน้าสร้างแอดออน
+│   │   ├── wardrobe.js           # ตัวควบคุมหลักหน้าตู้เสื้อผ้า
+│   │   ├── sfx.js                # เสียงเอฟเฟกต์ Web Audio API (ไม่ต้องโหลดไฟล์ mp3)
+│   │   ├── mcfire.js             # สะเก็ดไฟพิกเซล Minecraft
+│   │   └── utils.js              # ตัวแจ้งเตือน Toast, ตรวจจับแขน Steve/Alex
+│   │
+│   ├── styles/                   # 🎨 สไตล์ CSS แยกเป็นหมวดหมู่ ค้นหาง่าย
+│   │   ├── variables.css         # โทนสี Obsidian, Emerald, ขนาดขอบมน และ Font Tokens
+│   │   ├── header.css            # แถบเมนูด้านบน, โลโก้, ปุ่มสลับธีม และปุ่มติดตั้ง PWA
+│   │   ├── workbench.css         # จอพรีวิว 3D, กล่อง Live Card, คอนโซลปรับแต่ง
+│   │   ├── hero-editorial.css    # ส่วนหัวเว็บ Hero Showcase
+│   │   ├── guide.css             # แท็บคู่มือการติดตั้งแบบ Pill Centered
+│   │   ├── components.css        # ปุ่ม, Dropzone, กล่อง Toast แจ้งเตือน
+│   │   ├── forms.css             # ช่องกรอกชื่อแอดออน, เช็กบ็อกซ์เลือกชิ้นส่วน
+│   │   └── dock.css              # แถบนำทางด้านล่างหน้าจอสำหรับมือถือ
+│   │
+│   ├── main.js                   # ไฟล์เริ่มต้นระบบ (Event Router, Paste, Global Drop)
+│   └── style.css                 # จุดเชื่อมโยงไฟล์ CSS ทั้งหมดเข้าด้วยกัน
+│
+├── tests/                        # 🧪 ชุดทดสอบอัตโนมัติ (Unit Tests ครบ 42 รายการ)
+├── index.html                    # หน้าเว็บหลัก Single Page Application
+├── package.json                  # รายการ Dependencies และคำสั่งรันโปรเจกต์
+└── vite.config.js                # การตั้งค่า Vite Bundler
+```
+
+---
+
+## 🛠️ คู่มือสำหรับมือใหม่: อยากแก้อะไร ต้องไปที่ไฟล์ไหน?
+
+| สิ่งที่คุณต้องการแก้ไข | ไฟล์ที่ต้องเปิด | คำอธิบายสั้นๆ |
+| :--- | :--- | :--- |
+| **เปลี่ยนสีหลัก / ฟอนต์ / ธีมเว็บ** | `src/styles/variables.css` | รวมตัวแปรสีทั้งหมด เช่น `--blurple`, `--spring`, `--ink-100` |
+| **แก้หน้าตาหรือขนาดปุ่มติดตั้ง PWA** | `src/styles/header.css` | ค้นหาคลาส `.nav-install` |
+| **แก้หน้าตา Dropzone ลากไฟล์** | `src/styles/components.css` | ค้นหาคลาส `.upload-dropzone` |
+| **แก้ขนาดหรือตำแหน่งจอ 3D** | `src/styles/workbench.css` | ค้นหาคลาส `.workbench-canvas-container` |
+| **แก้หรือเพิ่มพรีเซ็ตชิ้นส่วนสกิน** | `src/config/hidepart.config.js` | กำหนดค่า Boolean ใน `HIDEPART_PRESETS` |
+| **แก้เวอร์ชัน Bedrock เริ่มต้น** | `src/config/bedrock.config.js` | ปรับแก้ `MINECRAFT_CONFIG.FORMAT_VERSION` |
+| **แก้ข้อความแจ้งเตือน Error** | `src/core/errors/AppError.js` | ค้นหาข้อความภาษาไทยใน `USER_MESSAGES` |
+| **แก้โครงสร้างปุ่ม/ข้อความบนหน้าเว็บ** | `index.html` | ไฟล์ HTML หน้าหลักของเว็บ |
+
+---
+
+## 🚀 วิธีติดตั้งและรันโปรเจกต์ (Step-by-Step Setup)
+
+### สิ่งที่ต้องมีในเครื่อง:
+- [Node.js](https://nodejs.org/) (แนะนำเวอร์ชัน 18 ขึ้นไป)
+
+### 1. ติดตั้ง Dependencies:
+เปิด Terminal หรือ Command Prompt ในโฟลเดอร์โปรเจกต์ แล้วพิมพ์:
+```powershell
+npm install
+```
+
+### 2. รัน Dev Server เพื่อดูผลสดๆ ในเครื่อง:
+```powershell
+npm run dev
+```
+ระบบจะเปิดพอร์ตให้ใช้งาน เช่น `http://localhost:3000/` หรือ `http://localhost:3002/` (เปิดดูผ่านเบราว์เซอร์ได้ทันที และแก้โค้ดจะอัปเดตแบบเรียลไทม์)
+
+### 3. รันการทดสอบระบบ (Automated Tests):
+ตรวจสอบว่าโค้ดยังทำงานถูกต้อง 100% ด้วยคำสั่ง:
+```powershell
+npm test
+```
+*(ระบบจะรัน Unit Tests ครบ 42 ข้อ ในเวลาเพียง 2-3 วินาที)*
+
+### 4. ตรวจสอบชนิดข้อมูล (TypeScript Type-Check):
+```powershell
+npm run type-check
+```
+
+### 5. บิลด์ไฟล์สำเร็จรูปสำหรับขึ้นเซิร์ฟเวอร์ (Production Build):
+```powershell
+npm run build
+```
+*(ไฟล์บิลด์สำเร็จรูปจะถูกสร้างไว้ในโฟลเดอร์ `dist/`)*
 
 ---
 
 ## 🛡️ จุดเด่นด้านสถาปัตยกรรม (Architecture Highlights)
 
-- **Pure Client-Side 100%**: ปลอดภัย ไร้เซิร์ฟเวอร์ ไม่ส่งภาพสกินหรือโค้ดออกภายนอก จัดการไฟล์ ZIP ผ่าน `JSZip` ในหน่วยความจำทั้งหมด
-- **3D Cosmetics & Blockbench Engine**: ผสานโมเดล 3D และ Bedrock Geometry 1.12.0+ In-Memory พร้อมเรนเดอร์ชิ้นส่วน Cube บน Three.js
-- **Smart Alpha Inferrer & Outer Layer Masking**: ปลดล็อกแก้ปัญหาสกินไม่ตรงปกจากไฟล์ JPG หรือภาพแคปจอ โดยลบเฉพาะกล่องดำของเลเยอร์นอก (Hat, Jacket, Sleeves, Pants) ให้โปร่งใส และคงเลเยอร์ในไว้ครบถ้วน 100%
-- **Dominant Cluster Sampling**: ตรวจจับสีพื้นหลังแบบกลุ่มสีหลัก ทนทานต่อภาพแฟนอาร์ตที่มีแสงเงา แสงนีออน หรือ Noise จากการบีบอัดภาพ
-- **Universal Auto-Resampler**: ปรับขนาดสกินสี่เหลี่ยมจัตุรัสอิสระ (เช่น 1452x1452, 1254x1254, 800x800) ลงสู่ 64x64 มาตรฐาน Bedrock อัตโนมัติ
-- **Full PWA Offline Support**: ติดตั้งเป็นแอปบนหน้าจอโฮมมือถือได้ทันที พร้อม Service Worker แคชไฟล์ในเครื่อง เปิดใช้งานได้แม้อยู่ในโหมดไม่มีเน็ต
-- **SafeZip Protection**: ตรวจจับและบล็อกช่องโหว่ Zip Bomb และ Path Traversal (`../`)
-- **3D Preview Engine**: เรนเดอร์โมเดล 3D แบบเรียลไทม์ด้วย `skinview3d` (Steve/Alex, Walk/Run/Idle) พร้อมระบบหยุดเรนเดอร์เมื่อเลื่อนพ้นจอเพื่อประหยัดแบตเตอรี่
-- **Authentic Minecraft UI & Sound**: สไตล์ Minecraft UI (Deepslate, Beveled Buttons, Hotbar Mobile Dock, Silkscreen Typography) และเสียง SFX สังเคราะห์ผ่าน Web Audio API
-- **Universal Input**: ลากวางไฟล์บนจอได้ทุกที่ (Global Drag & Drop) และกด **Ctrl + V** เพื่อแปะภาพจาก Clipboard ได้ทันที
+- **Pure Client-Side 100%**: ปลอดภัย มั่นใจได้ ไม่มีการส่งไฟล์สกินขึ้นเซิร์ฟเวอร์ภายนอก ประมวลผลและสร้างไฟล์ ZIP/MCPACK ผ่าน RAM ของเครื่องผู้ใช้โดยตรง
+- **Bedrock Humanoid Geometry Integration**: ฝังโมเดล Steve และ Alex มาตรฐานลงใน Resource Pack แก้ปัญหากล่องดำในช่องเก็บของ (Paperdoll Black Box) 100%
+- **Smart Alpha Inferrer**: ตรวจจับสีพื้นหลังและตัดขอบดำเฉพาะเลเยอร์นอกของไฟล์ภาพ JPG ให้อัตโนมัติ โดยไม่ทำลายเลเยอร์ใน
+- **Universal Auto-Resampler**: ปรับขนาดสกินขนาดอิสระ (เช่น 1452×1452 หรือ 800×800) ลงสู่ 64×64 มาตรฐานอัตโนมัติ
+- **PWA Offline Support**: ใช้งานได้แม้ไม่มีสัญญาณอินเทอร์เน็ต และติดตั้งลงหน้าจอโฮมมือถือได้ง่าย
 
 ---
 
-## 📁 โครงสร้างไฟล์ในโปรเจกต์ (Clean Modular Layout)
-
-```
-MCPE-WEBSKIN/
-├── public/
-│   ├── manifest.webmanifest  # PWA Web App Manifest
-│   ├── sw.js                 # PWA Service Worker (Offline Cache-First)
-│   ├── templates/            # แม่แบบ Minecraft Bedrock Addon (BP/RP)
-│   └── favicon.ico           # ไอคอนเว็บ
-├── src/
-│   ├── core/                 # Headless Core Engine (Pure In-Memory, Zero DOM)
-│   │   ├── addon/            # ตัวสร้างแอดออนสกินสวมใส่ 1.21.10+
-│   │   ├── cosmetics/        # ตัวจัดการโมเดล 3D เสริม & Blockbench (.geo.json)
-│   │   ├── wardrobe/         # ตัวสร้างและแยกแพ็กเกจสกินแพ็ก (.mcpack)
-│   │   ├── skin/             # UV Coordinates, Smart Alpha Inferrer, Resampler
-│   │   ├── validator/        # ตรวจสอบ Manifest, UUID, Textures
-│   │   ├── security/         # ระบบป้องกัน Zip Bomb & Traversal (SafeZip)
-│   │   └── errors/           # ระบบ Error รวมศูนย์มาตรฐาน
-│   ├── modules/              # UI Controllers
-│   │   ├── hidepart.js       # ตัวควบคุมหน้าสกินล่องหน + 3D Canvas
-│   │   ├── standalone.js     # ตัวควบคุมหน้าแอดออนสกิน + 3D Cosmetics + Blockbench
-│   │   ├── wardrobe.js       # ตัวควบคุมหน้าสกินแพ็ก + 3D Live Inspect Modal
-│   │   ├── zip.js            # ตัวแตกและอ่านไฟล์ ZIP/MCPACK/MCADDON
-│   │   ├── sfx.js            # ระบบเสียงสังเคราะห์ Minecraft (Web Audio API)
-│   │   ├── mcfire.js         # สะเก็ดไฟละอองพิกเซล Minecraft
-│   │   └── utils.js          # ฟังก์ชันช่วย (UUID, Toast, Resolution, Resampling)
-│   ├── styles/               # Modular CSS Design System (Minecraft Theme)
-│   ├── types/                # TypeScript Type Definitions
-│   ├── main.js               # Router, Drag&Drop, Paste, PWA Lifecycle
-│   └── style.css             # Main CSS Master Importer
-├── tests/                    # Vitest Automated Test Suite (43 Tests / 9 Suites)
-├── index.html                # Main Application Shell
-├── tsconfig.json             # TypeScript Compiler Options
-├── vite.config.js            # Vite Configuration
-└── README.md
-```
-
----
-
-## 💻 การพัฒนาและทดสอบ (Development & Testing)
-
-```bash
-# 1. ติดตั้ง Dependencies
-npm install
-
-# 2. รัน Dev Server
-npm run dev
-
-# 3. รัน Unit Tests (Vitest)
-npm test
-
-# 4. ตรวจสอบ TypeScript Types
-npm run type-check
-
-# 5. Build สำหรับ Production
-npm run build
-```
-
----
-
-## 🚀 Git & Deployment Workflow
-
-- **Branch `main`**: ซอร์สโค้ดหลักของโปรเจกต์ (Deploy อัตโนมัติบน Vercel)
-- **Branch `gh-pages`**: ถูกบิลด์และ Deploy ขึ้น GitHub Pages อัตโนมัติผ่าน GitHub Actions (`.github/workflows/deploy.yml`)
-- ส่งโค้ดขึ้น GitHub:
-  ```bash
-  git add .
-  git commit -m "feat: your update message"
-  git push origin main
-  ```
-
----
-
-## 📄 ลิขสิทธิ์และผู้พัฒนา
-พัฒนาและออกแบบโดย **ZirconX** ([www.zirconx.xyz](https://www.zirconx.xyz))
+## 📄 ลิขสิทธิ์และการพัฒนา
+- พัฒนาโดย **ZirconX Studio** ([www.zirconx.xyz](https://www.zirconx.xyz))
+- ออกแบบสำหรับคอมมูนิตี้ Minecraft Bedrock Edition (MCPE / Windows 10/11 / iOS / Android)

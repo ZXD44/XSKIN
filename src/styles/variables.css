@@ -1,152 +1,382 @@
 /* ==========================================================================
-   ZIRCONX SKIN STUDIO — MINECRAFT BEDROCK DESIGN SYSTEM & TOKENS
+   ZIRCONX STUDIO — FOUNDATIONS
+   Obsidian engineering suite · Discord-cosmic reference (Dircord-Design/DESIGN.md)
+   Layer 0 = tokens. Nothing here paints a component.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Silkscreen:wght@400;700&display=swap');
-
 :root {
-  /* Typography */
-  --font-pixel: 'Silkscreen', monospace;
-  --font-heading: 'Cinzel', serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: dark;
 
-  /* Minecraft Dark Deepslate & Bedrock Palette */
-  --bg-app: #121318;
-  --bg-surface: #181a20;
-  --bg-panel: #20232a;
-  --bg-panel-elevated: #282c35;
-  --bg-card: #22252e;
-  --bg-card-hover: #2a2e39;
-  --bg-header: rgba(18, 19, 24, 0.92);
-  --bg-input: #15171d;
+  /* ---------- Brand accents (single chromatic anchor = Blurple) ---------- */
+  --blurple: #5865f2;
+  --blurple-deep: #3442d9;
+  --blurple-soft: #8891f2;
+  --spring: #57f287;
+  --fuchsia: #eb459e;
+  --cerulean: #00b0f4;
+  --ember: #fda220;
+  --ekko: #de2761;
 
-  /* Minecraft GUI Bevel & Borders */
-  --mc-border-dark: #0e0f14;
-  --mc-border-light: #3e434f;
-  --mc-border-mid: #2c303a;
-  --mc-bevel-light: #4c5260;
-  --mc-bevel-dark: #0a0b0e;
+  /* ---------- Obsidian surfaces (dark = default environment) ---------- */
+  --ink-000: #04050a;
+  --ink-050: #070912;
+  --ink-100: #0a0d1a;
+  --ink-150: #0d1122;
+  --ink-200: #111529;
+  --ink-250: #161b33;
+  --ink-300: #1b2140;
+  --ink-400: #232a4e;
 
-  /* Minecraft Signature Color Accents */
-  --mc-green: #22c55e;
-  --mc-green-glow: rgba(34, 197, 94, 0.35);
-  --mc-emerald: #10b981;
-  --mc-diamond: #38bdf8;
-  --mc-diamond-glow: rgba(56, 189, 248, 0.35);
-  --mc-gold: #f59e0b;
-  --mc-gold-glow: rgba(245, 158, 11, 0.35);
-  --mc-redstone: #ef4444;
-  --mc-redstone-glow: rgba(239, 68, 68, 0.35);
-  --mc-netherite: #7c3aed;
-  --mc-netherite-glow: rgba(124, 58, 237, 0.35);
+  /* ---------- Text ---------- */
+  --text-hi: #f2f4ff;
+  --text-mid: #a9b0d6;
+  --text-low: #7c84ab;
+  --text-faint: #59618a;
 
-  /* Primary Brand — Minecraft Bedrock Emerald / Dragon Redstone Accent */
-  --primary: #22c55e;
-  --primary-bright: #4ade80;
-  --primary-dark: #16a34a;
-  --primary-glow: rgba(34, 197, 94, 0.3);
+  /* ---------- Hairlines ---------- */
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.14);
+  --line-blurple: rgba(88, 101, 242, 0.38);
 
-  --accent-red: #ef4444;
-  --accent-gold: #f59e0b;
-  --accent-blue: #38bdf8;
+  /* ---------- Semantic surface aliases ---------- */
+  --bg-app: var(--ink-050);
+  --bg-deep: var(--ink-000);
+  --bg-surface: var(--ink-100);
+  --bg-raised: var(--ink-150);
+  --bg-card: rgba(14, 18, 34, 0.86);
+  --bg-card-solid: var(--ink-150);
+  --bg-input: var(--ink-050);
+  --bg-hover: rgba(255, 255, 255, 0.055);
+  --bg-active: rgba(255, 255, 255, 0.09);
+  --bg-glass: rgba(10, 13, 26, 0.72);
 
-  /* Text Colors */
-  --text-main: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  --text-dim: #4b5563;
-  --text-mc-green: #4ade80;
-  --text-mc-gold: #fbbf24;
-  --text-mc-diamond: #38bdf8;
-  --text-mc-red: #f87171;
+  --color-text-primary: var(--text-hi);
+  --color-text-secondary: var(--text-mid);
+  --color-text-muted: var(--text-low);
+  --color-text-dim: var(--text-faint);
 
-  /* Minecraft Radii (Sharp & Pixelated or Clean 4-8px) */
-  --r-pixel: 0px;
-  --r-xs: 4px;
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
-  --r-xl: 18px;
-  --r-full: 9999px;
+  --primary: var(--blurple);
+  --primary-hover: var(--blurple-deep);
+  --border-subtle: var(--line);
+  --border-card: var(--line-strong);
 
-  /* Box Shadows & Bevels */
-  --shadow-mc-button: inset 2px 2px 0 var(--mc-bevel-light), inset -2px -2px 0 var(--mc-bevel-dark), 0 4px 12px rgba(0, 0, 0, 0.5);
-  --shadow-mc-pressed: inset 2px 2px 0 var(--mc-bevel-dark), inset -2px -2px 0 var(--mc-bevel-light);
-  --shadow-panel: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
-  --shadow-glow-green: 0 0 20px rgba(34, 197, 94, 0.25);
-  --shadow-glow-gold: 0 0 20px rgba(245, 158, 11, 0.25);
+  /* Legacy token names still referenced by a few components */
+  --color-blurple: var(--blurple);
+  --color-dark-blurple: var(--blurple-deep);
+  --color-hover-blurple: var(--blurple-soft);
+  --color-spring-green: var(--spring);
+  --color-fuchsia: var(--fuchsia);
+  --color-vivid-cerulean: var(--cerulean);
+  --color-ember-orange: var(--ember);
+  --color-ekko-red: var(--ekko);
+  --color-snow: #ffffff;
+  --color-off-white: #f4f5fa;
+  --color-not-quite-black: #10122a;
+  --color-dark-charcoal: var(--ink-250);
+  --color-graphite: #3a4166;
+  --color-fog: var(--text-mid);
+  --color-greyple: var(--text-low);
+  --color-dim-grey: var(--text-faint);
+  --color-void: #000000;
 
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --surface-cosmic-page: var(--ink-050);
+  --surface-app-chrome: var(--ink-200);
+  --surface-app-surface: var(--ink-150);
+  --surface-glass-card: var(--bg-card);
+  --surface-glass-panel: var(--bg-glass);
+
+  /* ---------- Type ---------- */
+  --font-display: 'Anton', 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter Tight', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-family-display: var(--font-display);
+  --font-family-body: var(--font-body);
+  --font-family-mono: var(--font-mono);
+
+  --text-body: 16px;
+  --leading-body: 1.55;
+  --text-body-lg: 19px;
+  --leading-body-lg: 1.45;
+  --text-heading-sm: 30px;
+  --text-heading: 44px;
+  --text-heading-lg: 58px;
+  --text-display: 76px;
+
+  /* ---------- 4px spacing scale ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-7: 32px;
+  --sp-8: 40px;
+  --sp-9: 56px;
+  --sp-10: 72px;
+  --sp-11: 96px;
+
+  --spacing-4: var(--sp-1);
+  --spacing-8: var(--sp-2);
+  --spacing-12: var(--sp-3);
+  --spacing-16: var(--sp-4);
+  --spacing-20: var(--sp-5);
+  --spacing-24: var(--sp-6);
+  --spacing-28: 28px;
+  --spacing-36: 36px;
+  --spacing-40: var(--sp-8);
+  --spacing-48: 48px;
+  --spacing-52: 52px;
+  --spacing-56: var(--sp-9);
+  --spacing-80: 80px;
+  --spacing-112: 112px;
+  --spacing-136: 136px;
+  --spacing-176: 176px;
+
+  /* ---------- Radii, elevation, motion ---------- */
+  --r-xs: 8px;
+  --r-sm: 10px;
+  --r-btn: 12px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-xl: 26px;
+  --r-pill: 999px;
+
+  --radius-buttons: var(--r-btn);
+  --radius-buttonslarge: var(--r-md);
+  --radius-cards: var(--r-md);
+  --radius-featurepanels: var(--r-xl);
+  --radius-pills: var(--r-pill);
+  --radius-full: 999px;
+
+  --shadow-1: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-2: 0 18px 48px rgba(0, 0, 0, 0.5);
+  --shadow-3: 0 40px 90px rgba(0, 0, 0, 0.62);
+  --glow-blurple: 0 0 0 1px rgba(88, 101, 242, 0.35), 0 12px 34px rgba(88, 101, 242, 0.28);
+  --glow-spring: 0 0 14px rgba(87, 242, 135, 0.55);
+  --shadow-card: var(--shadow-1);
+  --shadow-elevation: var(--shadow-2);
+  --glow-blurple-subtle: 0 8px 22px rgba(88, 101, 242, 0.22);
+
+  /* Active pill: light chip on dark chrome */
+  --pill-active-bg: #f2f4ff;
+  --pill-active-fg: #0a0c18;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease: var(--ease);
+  --motion-fast: 150ms var(--ease);
+  --motion-normal: 280ms var(--ease);
+
+  /* ---------- Shell metrics ---------- */
+  --nav-h: 72px;
+  --shell-max: 1320px;
+  --gutter: clamp(16px, 3.2vw, 40px);
+  --dock-h: 72px;
+  --sidebar-width: 0px;
+  --topbar-height: var(--nav-h);
+  --bottom-dock-height: var(--dock-h);
 }
 
-*, *::before, *::after {
+/* Light mode — daylight obsidian (same bones, paper light) */
+[data-theme='light'] {
+  color-scheme: light;
+
+  --ink-000: #ffffff;
+  --ink-050: #f5f6fb;
+  --ink-100: #eef0f8;
+  --ink-150: #ffffff;
+  --ink-200: #f7f8fd;
+  --ink-250: #eceefa;
+  --ink-300: #e2e5f4;
+  --ink-400: #d3d7ea;
+
+  --text-hi: #0d1030;
+  --text-mid: #4b5178;
+  --text-low: #6a7096;
+  --text-faint: #8d93b4;
+
+  --line: rgba(13, 16, 48, 0.1);
+  --line-strong: rgba(13, 16, 48, 0.18);
+  --line-blurple: rgba(88, 101, 242, 0.4);
+
+  --bg-app: #f5f6fb;
+  --bg-deep: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-raised: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-card-solid: #ffffff;
+  --bg-input: #ffffff;
+  --bg-hover: rgba(13, 16, 48, 0.05);
+  --bg-active: rgba(13, 16, 48, 0.08);
+  --bg-glass: rgba(255, 255, 255, 0.78);
+
+  --shadow-1: 0 1px 2px rgba(16, 20, 52, 0.06), 0 10px 26px rgba(16, 20, 52, 0.07);
+  --shadow-2: 0 20px 46px rgba(16, 20, 52, 0.12);
+  --shadow-3: 0 40px 90px rgba(16, 20, 52, 0.16);
+
+  --pill-active-bg: #10122a;
+  --pill-active-fg: #f7f8ff;
+
+  --color-snow: #0d1030;
+  --color-fog: #4b5178;
+  --color-greyple: #6a7096;
+  --color-dim-grey: #8d93b4;
+  --color-text-primary: var(--text-hi);
+  --color-text-secondary: var(--text-mid);
+}
+
+/* ==========================================================================
+   RESET
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: transparent;
 }
 
 html {
-  background-color: var(--bg-app);
-  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
 }
 
+html,
 body {
-  font-family: var(--font-sans);
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
   background-color: var(--bg-app);
-  color: var(--text-main);
-  min-height: 100vh;
-  line-height: 1.5;
-  letter-spacing: -0.015em;
+  color: var(--text-hi);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: 0.004em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  justify-content: center;
   overflow-x: hidden;
-  position: relative;
-  /* Minecraft subtle dark bedrock grid pattern */
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.08) 0%, transparent 60%),
-    radial-gradient(circle at 100% 60%, rgba(245, 158, 11, 0.04) 0%, transparent 50%);
-  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
-  background-attachment: fixed;
+  font-feature-settings: 'ss01' on, 'cv05' on;
 }
 
-/* Scrollbar Styling — Minecraft Deepslate */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-app);
-}
-::-webkit-scrollbar-thumb {
-  background: #2e333d;
-  border-radius: 4px;
-  border: 1px solid var(--mc-border-dark);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3e4452;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* App Container */
-.app-container {
-  width: 100%;
-  max-width: 1140px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: calc(84px + var(--safe-bottom));
-  position: relative;
-  margin: 0 auto;
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (min-width: 821px) {
-  .app-container {
-    padding-bottom: 2.5rem;
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+::selection {
+  background: rgba(88, 101, 242, 0.42);
+  color: #fff;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY PRIMITIVES
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-hi);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.display,
+.hero-headline,
+.work-card-title,
+.section-headline {
+  font-family: var(--font-display);
+  font-weight: 400; /* Anton is already heavy */
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.92;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-low);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   FOCUS — always visible, brand-emerald ring
+   ========================================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--spring);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   SHARED MICRO-COMPONENTS
+   ========================================================================== */
+
+.pulse-dot,
+.chip-dot,
+.status-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--spring);
+  box-shadow: var(--glow-spring);
+  animation: pulseDot 2.4s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.82); }
+}
+
+@keyframes stageEnter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

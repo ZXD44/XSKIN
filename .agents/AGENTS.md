@@ -9,6 +9,8 @@
 - **มาตรฐานเว็บและ UI/UX**: [web_standards.md](rules/web_standards.md)
 - **กฎการสร้างแอดออน Bedrock**: [addon_generation_rules.md](rules/addon_generation_rules.md)
 - **โหมดกระชับรวดเร็ว (Caveman Mode)**: [caveman.md](rules/caveman.md)
+- **ปรัชญาการออกแบบ Impeccable Style**: [impeccable-style/SKILL.md](skills/impeccable-style/SKILL.md)
+- **ระบบดีพลอยอัตโนมัติ (.workflow)**: [.workflow/deploy.md](../.workflow/deploy.md)
 
 ---
 
@@ -28,6 +30,8 @@
 3. **มาตรฐานแอดออนสกินสวมใส่ (Bedrock 1.21.10+ Standard)**:
    - ใช้ `minecraft:wearable` ตามช่องสวมใส่ (`slot.armor.chest`, `slot.armor.head`, `slot.armor.legs`, `slot.armor.feet`)
    - **ใช้ Custom Render Controller (`controller.render.zirconx_skin`)** แทน `controller.render.armor` เพื่อแก้ปัญหาชิ้นส่วนสกินนอกช่องถูกซ่อน และรองรับวิกผมยาว/ปอยผมพาดตัว
+   - **ต้องฝังโมเดล Humanoid Geometry (`models/entity/humanoid_custom.geo.json`) เสมอ**: บรรจุโมเดล Steve (`geometry.humanoid.custom` แขน 4px) และ Alex (`geometry.humanoid.customSlim` แขน 3px) ลงใน Resource Pack เสมอ เพื่อป้องกันปัญหาเกมหา Geometry ไม่พบจนแสดงผลเป็นกล่องดำทึบในหน้าจอช่องเก็บของ (Paperdoll Black Box Glitch)
+   - **ระบบเลือกชิ้นส่วนอัตโนมัติตามช่องสวมใส่ (Smart Slot Part Sync)**: เมื่อเลือกช่องสวมใส่ (หมวก, เสื้อ, กางเกง, รองเท้า) ระบบต้องตั้งค่าและแสดงผลชิ้นส่วนสกินที่ถูกต้องตรงช่องทันที ป้องกันปัญหาเสื้อติดชิ้นส่วนหัวดำ หรือเสื้อไม่มีแขน
    - `protection: 0`, `max_stack_size: 1`, ไม่มี `minecraft:durability` (Unbreakable)
    - **ห้ามใช้คอมโพเนนต์เก่าที่ Deprecated** เช่น `minecraft:armor` และ `minecraft:render_offsets`
    - ซ่อนโมเดลขณะถือในมือด้วยสเกล `1e-5` ใน attachable
@@ -67,11 +71,42 @@
    - ตัวอย่าง Emoji ปลอดภัย (Unicode ≤ 14.0): `🐉` `🐱` `🦊` `👑` `🎒` `📁` `❌` `✨` `💡` `📦`
    - ทุก Element ที่แสดง Emoji ต้องกำหนด `font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;` เสมอ เพื่อบังคับให้เบราว์เซอร์ใช้ Font Emoji ที่เหมาะสม
 
+10. **การทำงานแบบทีละขั้นตอน โฟกัสทีละจุด (Step-by-Step Single-Focus Execution)**:
+    - เมื่องานมีหลายเงื่อนไข มีคำว่า "และ/หรือ" หรือมีความซับซ้อน **ห้ามแก้ทุกอย่างพร้อมกันในคราวเดียว**
+    - ต้องแตกย่อยเป็น Step ชัดเจน ทำทีละจุด โฟกัสแก้ทีละเป้าหมาย ทดสอบยืนยันความแม่นยำ แล้วจึงขยับไปจุดถัดไป เพื่อความละเอียดและป้องกันผลข้างเคียง
+
+11. **การดีพลอยอัตโนมัติ (Automated Deployment Trigger)**:
+    - เมื่อผู้ใช้สั่ง `deploy` หรือ `/deploy` ระบบจะเรียกและปฏิบัติตามคำสั่งใน [`.workflow/deploy.md`](../.workflow/deploy.md) ทันที:
+      1. ตรวจสอบ Integrity: รันเทสต์ `npm test` + `npm run type-check` + `npm run build`
+      2. Git Sync: `git add .` + `git commit`
+      3. Cloud Push: `git push origin main` (เรียก GitHub Actions CI/CD สร้างกิ่ง `gh-pages`)
+      4. รายงานสรุปผลพร้อม Live URL ทันที
+
+12. **มาตรฐาน Impeccable Style (Anti-AI-Slop Frontend Standard)**:
+    - ปฏิบัติตามหลักการออกแบบใน [`DESIGN.md`](../DESIGN.md) และ [`.agents/skills/impeccable-style/SKILL.md`](skills/impeccable-style/SKILL.md)
+    - แบนการใช้สีม่วงไล่เฉด AI Slop ทั่วไป, ฟอนต์ต้องมีบุคลิกชัดเจนตามธีม Minecraft Obsidian/Emerald, ปุ่มกดต้องมีสัมผัสแบบ Physical Tactile, 60fps micro-animations, และคงมาตรฐานการเข้าถึง WCAG AA/AAA เสมอ
+
 ---
 
 ## 📝 บันทึกประวัติการปรับปรุงระบบ (Update Logs & Changelog)
 
-### v1.5.0 (ล่าสุด - 29 กันยายน 2026)
+### v1.7.1 (ล่าสุด - 1 พฤศจิกายน 2026)
+- **Universal Dropzone & Multi-Format**: ปรับปรุง Hidepart Dropzone ให้คลิกเปิด File Picker ได้ทันที รองรับครบทั้งภาพ (.png, .jpg, .jpeg, .webp, MIME image/*) และแพ็กเกจ (.zip, .mcpack, .mcaddon) พร้อม Scan Beam FX และแปะสกินด้วย Ctrl+V
+- **Slot Icon Live Card as Single Source of Truth**: ลบแถว `icon-preview-row` ที่ซ้ำซ้อนออก และผสานปุ่มลบ/รีเซ็ตไอคอนเข้ากับ `slot-icon-live-card`
+- **Short & Distinct Showcase Badges**: แก้ไขป้ายกำกับใน Hero Showcase ให้สั้นกระชับ แยกเป็น `Bedrock` (Titlebar) และ `3D Preview` (มุมจอ 3D) ป้องกันความสับสน
+- **Centered Pill Guide Tabs**: จัดระเบียบ `.guide-nav-tabs` ให้อยู่กึ่งกลาง ดีไซน์ขอบมน (Pill) สวยงามแบบ Glassmorphism พร้อมกระจายตัว 50/50 บนมือถือ
+- **Compact & Lag-Free PWA Install Button**: ปรับปุ่มติดตั้ง PWA เป็นคำว่า "ติดตั้ง" ความสูง 32px ตอบสนองเร็วระดับ 60fps ไร้แอนิเมชันหน่วงเครื่อง
+
+### v1.7.0 (1 พฤศจิกายน 2026)
+- **Impeccable Style Integration**: ติดตั้งแนวคิดการออกแบบระดับพรีเมียมจาก impeccable.style ป้องกัน AI Slop พร้อมร่าง `DESIGN.md` และ skill `impeccable-style`
+- **Automated Workflow (.workflow)**: ติดตั้งระบบดีพลอยอัตโนมัติครบวงจร เมื่อพิมพ์ `deploy` จะรันเทสต์ ตรวจสอบความถูกต้อง คอมมิต และ push ขึ้น GitHub Pages ทันที
+- **Full Architecture Refactoring**: แยกโค้ดแบบ Modular SoC ทุกไฟล์ใน `src/` ความยาวต่ำกว่า 500 บรรทัด (42/42 tests ผ่าน 100%)
+- **Bedrock Humanoid Geometry Integration**: แก้ไขปัญหาสกินไอเทมสวมใส่ในเกมแล้วหน้าจอ Paperdoll ดำสนิท (Fix-2.png) โดยการฝังโมเดล Humanoid Geometry มาตรฐาน (`models/entity/humanoid_custom.geo.json`) ครบทั้ง Steve (4px) และ Alex (3px) ลงใน Resource Pack อัตโนมัติ 100%
+- **Smart Slot Part Sync**: เมื่อเลือกช่องสวมใส่ (หมวก, เสื้อ, กางเกง, รองเท้า) ระบบจะปรับเลือกชิ้นส่วนสกินที่สัมพันธ์กับช่องนั้นให้อัตโนมัติ ป้องกันปัญหาเสื้อติดหัวดำ หรือเสื้อไม่มีแขน (Fix-1.png)
+- **Clean Addon Engine**: ลบระบบของแต่งตัว 3D เสริม (3D Cosmetics & Blockbench Bridge) ทิ้งทั้งหมดตามคำสั่ง เพื่อความเรียบง่าย เสถียร คลีน และประสิทธิภาพสูงสุด
+- **Geometry Definition Validation**: เพิ่มตัวตรวจสอบ Addon Validator ให้ตรวจเช็กว่าโมเดล Geometry ที่ Attachable อ้างอิง มีไฟล์นิยามอยู่ใน Resource Pack หรือไม่ ป้องกันการปล่อยแอดออนที่มีข้อผิดพลาด
+
+### v1.5.0 (29 กันยายน 2026)
 - **3D Cosmetics & Modular Accessories Studio**: เพิ่มระบบเลือกของแต่งตัว 3D สำเร็จรูป (หูแมว 3D, ปีกมังกร, หางจิ้งจอก, มงกุฎลอย, กระเป๋าเป้นักเดินทาง) สวมใส่เข้ากับตัวละครพร้อมระบบเลือกโทนสี หรือปรับสีตามสกินอัตโนมัติ (Auto-Color Sampling)
 - **Blockbench Bridge (.geo.json)**: รองรับการลากวางนำเข้าไฟล์โมเดล Bedrock Geometry ที่ออกแบบจากโปรแกรม Blockbench โดยตรง แปลงเป็นแอดออนสวมใส่ในเกมอัตโนมัติ 100% ไร้โค้ด JSON
 - **Real-time 3D Attachment Engine**: ชิ้นส่วน 3D เคลื่อนไหวตามท่าทางเดิน/วิ่งของตัวละครบนเบราว์เซอร์สดๆ ด้วย Three.js

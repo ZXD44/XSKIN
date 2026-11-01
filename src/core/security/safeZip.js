@@ -4,18 +4,9 @@
  */
 import JSZip from 'jszip';
 import { AppError, ErrorCode } from '../errors/AppError.js';
+import { ARCHIVE_LIMITS, ALLOWED_EXTENSIONS } from '../../config/archive.config.js';
 
-export const ARCHIVE_LIMITS = {
-  MAX_ARCHIVE_SIZE: 25 * 1024 * 1024,       // 25 MB
-  MAX_FILE_COUNT: 250,                     // max 250 files
-  MAX_TOTAL_UNCOMPRESSED: 50 * 1024 * 1024,// 50 MB
-  MAX_SINGLE_FILE_SIZE: 15 * 1024 * 1024,  // 15 MB
-  MAX_JSON_SIZE: 2 * 1024 * 1024           // 2 MB
-};
-
-export const ALLOWED_EXTENSIONS = [
-  '.png', '.json', '.lang', '.tga', '.material', '.txt'
-];
+export { ARCHIVE_LIMITS, ALLOWED_EXTENSIONS };
 
 /**
  * Validate path against directory traversal and dangerous characters

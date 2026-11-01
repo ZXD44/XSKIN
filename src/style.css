@@ -1,30 +1,25 @@
 /* ==========================================================================
-   ZIRCONX SKIN STUDIO — MODULAR CSS ARCHITECTURE (BLOOD DRAGON THEME)
+   ZIRCONX STUDIO — STYLE ENTRY
+   Cascade order: foundations → shell → screens → components → overlays
    ========================================================================== */
 
-/* 1. Design Tokens, Typography & Reset */
+/* 1. Tokens, reset, typography */
 @import './styles/variables.css';
 
-/* 2. Header & Top Navigation */
+/* 2. Shell: app frame, ambient light, top navigation, footer */
+@import './styles/shell.css';
 @import './styles/header.css';
 
-/* 3. Main Layout & Page Transitions */
-@import './styles/layout.css';
+/* 3. Screens: hero, workspace showcase, workbenches, docs */
+@import './styles/hero-editorial.css';
+@import './styles/bento.css';
+@import './styles/workbench.css';
+@import './styles/guide.css';
 
-/* 4. Blood Dragon Hero Stage & CTA */
-@import './styles/hero.css';
-
-/* 5. Tool Cards Grid (Obsidian Metallic Slabs) */
-@import './styles/toolcards.css';
-
-/* 6. Shared Components (Dropzone, 3D Stage, Buttons) */
+/* 4. Components: buttons, inputs, dropzones, roster, toasts */
 @import './styles/components.css';
-
-/* 7. Skin Editor & Part Controls */
-@import './styles/editor.css';
-
-/* 8. Forms, Inputs & Wardrobe Roster */
 @import './styles/forms.css';
 
-/* 9. Mobile Bottom Dock & Toasts */
+/* 5. Overlays & mobile chrome */
+@import './styles/modals.css';
 @import './styles/dock.css';

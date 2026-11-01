@@ -4,6 +4,13 @@
  */
 import JSZip from 'jszip';
 import { AppError, ErrorCode } from '../errors/AppError.js';
+import { getStandardHumanoidGeometryJson } from './humanoidGeometry.js';
+import {
+  BEDROCK_FORMAT_VERSIONS,
+  BEDROCK_MIN_ENGINE_VERSION,
+  BEDROCK_RENDER_CONTROLLER_ID,
+  BEDROCK_GEOMETRY_IDS
+} from '../../config/bedrock.config.js';
 
 export function generateUUID() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -67,8 +74,8 @@ export async function createStandaloneSkinAddon(options) {
   const rpFolder = `${addonName}_ZirconX-SKIN_RP`;
 
   // Determine geometry identifier
-  let geometryIdentifier = 'geometry.humanoid.customSlim';
-  if (modelType === 1) geometryIdentifier = 'geometry.humanoid.custom';
+  let geometryIdentifier = BEDROCK_GEOMETRY_IDS.ALEX;
+  if (modelType === 1) geometryIdentifier = BEDROCK_GEOMETRY_IDS.STEVE;
   if (customGeometryJson) {
     const geo = customGeometryJson['minecraft:geometry']?.[0] || customGeometryJson.geometry?.[0];
     if (geo?.description?.identifier) {
@@ -79,7 +86,7 @@ export async function createStandaloneSkinAddon(options) {
   // 1. Behavior Pack Items
   items.forEach(item => {
     const itemJson = {
-      format_version: '1.21.10',
+      format_version: BEDROCK_FORMAT_VERSIONS.ITEM,
       'minecraft:item': {
         description: {
           identifier: `zirconx:${item.id}`,
@@ -106,11 +113,11 @@ export async function createStandaloneSkinAddon(options) {
 
   // 2. Behavior Pack Manifest
   const bpManifest = {
-    format_version: 2,
+    format_version: BEDROCK_FORMAT_VERSIONS.MANIFEST,
     header: {
       name: `${addonName} | สกินไอเทม ${addonVersion.join('.')}`,
       description: 'แอดออนสกินสวมใส่ สร้างโดย ZirconX Skin Project',
-      min_engine_version: [1, 21, 60],
+      min_engine_version: BEDROCK_MIN_ENGINE_VERSION,
       uuid: bpUuid,
       version: addonVersion
     },
@@ -128,9 +135,9 @@ export async function createStandaloneSkinAddon(options) {
 
   // 3. Resource Pack Custom Render Controller
   const customRenderController = {
-    format_version: '1.10.0',
+    format_version: BEDROCK_FORMAT_VERSIONS.RENDER_CONTROLLER,
     render_controllers: {
-      'controller.render.zirconx_skin': {
+      [BEDROCK_RENDER_CONTROLLER_ID]: {
         geometry: 'geometry.default',
         materials: [{ '*': 'material.default' }],
         textures: ['texture.default']
@@ -148,7 +155,7 @@ export async function createStandaloneSkinAddon(options) {
 
   for (const item of items) {
     const attachableJson = {
-      format_version: '1.10.0',
+      format_version: BEDROCK_FORMAT_VERSIONS.ATTACHABLE,
       'minecraft:attachable': {
         description: {
           identifier: `zirconx:${item.id}`,
@@ -164,15 +171,9 @@ export async function createStandaloneSkinAddon(options) {
             default: geometryIdentifier
           },
           scripts: {
-            scale: 'c.is_first_person || c.is_third_person_hand ? 1e-5 : 1.0'
+            scale: "c.item_slot == 'main_hand' || c.item_slot == 'off_hand' ? 0.0 : 1.0"
           },
-          item_display_transforms: {
-            thirdperson_righthand: { scale: [1e-5, 1e-5, 1e-5] },
-            thirdperson_lefthand: { scale: [1e-5, 1e-5, 1e-5] },
-            firstperson_righthand: { scale: [1e-5, 1e-5, 1e-5] },
-            firstperson_lefthand: { scale: [1e-5, 1e-5, 1e-5] }
-          },
-          render_controllers: ['controller.render.zirconx_skin']
+          render_controllers: [BEDROCK_RENDER_CONTROLLER_ID]
         }
       }
     };
@@ -195,11 +196,11 @@ export async function createStandaloneSkinAddon(options) {
 
   // 5. Resource Pack Manifest
   const rpManifest = {
-    format_version: 2,
+    format_version: BEDROCK_FORMAT_VERSIONS.MANIFEST,
     header: {
       name: `${addonName} | สกินไอเทม ${addonVersion.join('.')}`,
       description: 'แอดออนสกินสวมใส่ สร้างโดย ZirconX Skin Project',
-      min_engine_version: [1, 21, 60],
+      min_engine_version: BEDROCK_MIN_ENGINE_VERSION,
       uuid: rpUuid,
       version: addonVersion
     },
@@ -215,7 +216,10 @@ export async function createStandaloneSkinAddon(options) {
   };
   zip.file(`${rpFolder}/manifest.json`, JSON.stringify(rpManifest, null, 2));
 
-  // 6. Custom Geometry file if present
+  // 6. Geometry definitions (Standard Bedrock Humanoid for Steve & Alex + Custom if present)
+  // Ensures Minecraft Bedrock 1.21.x can resolve attachable geometry without black box paperdoll crashes
+  zip.file(`${rpFolder}/models/entity/humanoid_custom.geo.json`, JSON.stringify(getStandardHumanoidGeometryJson(), null, 2));
+
   if (customGeometryJson) {
     const geoFileName = geometryIdentifier.replace(/^geometry\./, '') + '.geo.json';
     zip.file(`${rpFolder}/models/entity/${geoFileName}`, JSON.stringify(customGeometryJson, null, 2));

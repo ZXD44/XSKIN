@@ -36,6 +36,7 @@ describe('Addon Generator Core (Headless)', () => {
     const rpAttachable = result.zip.file(`${result.rpFolder}/attachables/skin_dragon_armor_001.json`);
     const rpRenderCtrl = result.zip.file(`${result.rpFolder}/render_controllers/zirconx_skin.json`);
     const rpSkinPng = result.zip.file(`${result.rpFolder}/textures/skin/skin_dragon_armor_001.png`);
+    const rpHumanoidGeo = result.zip.file(`${result.rpFolder}/models/entity/humanoid_custom.geo.json`);
     const rpLangTh = result.zip.file(`${result.rpFolder}/texts/th_TH.lang`);
     const rpLangEn = result.zip.file(`${result.rpFolder}/texts/en_US.lang`);
 
@@ -45,6 +46,7 @@ describe('Addon Generator Core (Headless)', () => {
     expect(rpAttachable).not.toBeNull();
     expect(rpRenderCtrl).not.toBeNull();
     expect(rpSkinPng).not.toBeNull();
+    expect(rpHumanoidGeo).not.toBeNull();
     expect(rpLangTh).not.toBeNull();
     expect(rpLangEn).not.toBeNull();
 
@@ -53,9 +55,10 @@ describe('Addon Generator Core (Headless)', () => {
     expect(itemData['minecraft:item'].components['minecraft:wearable'].slot).toBe('slot.armor.head');
     expect(itemData['minecraft:item'].components['minecraft:wearable'].protection).toBe(0);
 
-    // Validate in-hand 1e-5 scale in attachable
+    // Validate in-hand slot scale in attachable (c.item_slot scale logic without illegal item_display_transforms)
     const attachableData = JSON.parse(await rpAttachable.async('string'));
-    expect(attachableData['minecraft:attachable'].description.item_display_transforms.thirdperson_righthand.scale).toEqual([1e-5, 1e-5, 1e-5]);
+    expect(attachableData['minecraft:attachable'].description.item_display_transforms).toBeUndefined();
+    expect(attachableData['minecraft:attachable'].description.scripts.scale).toBe("c.item_slot == 'main_hand' || c.item_slot == 'off_hand' ? 0.0 : 1.0");
 
     // 3. Pipe directly into Addon Validator
     const validationReport = await validateAddonPackage(result.zip);

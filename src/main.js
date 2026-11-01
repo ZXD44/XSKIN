@@ -9,20 +9,61 @@ import { WardrobeMultiEditor } from './modules/wardrobe.js';
 import { initMinecraftFireParticles } from './modules/mcfire.js';
 import { sfx } from './modules/sfx.js';
 import { showToast } from './modules/utils.js';
+import { initExportSheet } from './modules/exportSheet.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 0. App Launch & Refresh Loading Screen Management
+  // 0. App Launch & Refresh Loading Screen Management (Discord Style)
   const appLoader = document.getElementById('app-loader');
+  const loaderStatusText = document.getElementById('loader-status-text');
+  const loaderTipText = document.getElementById('loader-tip-text');
+
+  const statusMessages = [
+    'กำลังเชื่อมต่อเอนจิน 3D Bedrock...',
+    'ประกอบโครงกระดูก Steve & Alex...',
+    'คำนวณ Smart Alpha ป้องกันกล่องดำ...',
+    'จูนเสียงสังเคราะห์ Web Audio...',
+    'ตรวจสอบระบบ In-Memory JSZip...'
+  ];
+
+  const tipsMessages = [
+    'คุณสามารถกด Ctrl+V เพื่อแปะสกินจาก Clipboard ได้ทันที!',
+    'ระบบ Smart Alpha จะช่วยตัดขอบดำของไฟล์ภาพ JPG ให้อัตโนมัติ',
+    'ลากไฟล์สกิน .png หรือ .mcpack มาปล่อยที่หน้าต่างไหนก็ได้',
+    'โหมดแอดออนสวมใส่ฝัง Humanoid Geometry ให้ครบ 100% แก้ Paperdoll ดำ'
+  ];
+
+  if (loaderTipText) {
+    loaderTipText.textContent = tipsMessages[Math.floor(Math.random() * tipsMessages.length)];
+  }
+
+  let statusIdx = 0;
+  const statusInterval = setInterval(() => {
+    if (!appLoader || appLoader.classList.contains('loader-hidden')) {
+      clearInterval(statusInterval);
+      return;
+    }
+    statusIdx = (statusIdx + 1) % statusMessages.length;
+    if (loaderStatusText) {
+      loaderStatusText.textContent = statusMessages[statusIdx];
+    }
+  }, 480);
+
   const dismissLoader = () => {
     if (!appLoader || appLoader.classList.contains('loader-hidden')) return;
-    appLoader.classList.add('loader-hidden');
+    clearInterval(statusInterval);
+    if (loaderStatusText) {
+      loaderStatusText.textContent = 'พร้อมใช้งาน! 🚀';
+    }
     setTimeout(() => {
-      appLoader.style.display = 'none';
-    }, 450);
+      appLoader.classList.add('loader-hidden');
+      setTimeout(() => {
+        appLoader.style.display = 'none';
+      }, 300);
+    }, 180);
   };
 
-  // Ensure a smooth transition with 400ms minimum display
-  const minTimer = new Promise(res => setTimeout(res, 400));
+  // Snappy display: 250ms minimum for clean aesthetic frame
+  const minTimer = new Promise(res => setTimeout(res, 250));
   const pageReady = new Promise(res => {
     if (document.readyState === 'complete') res();
     else window.addEventListener('load', res, { once: true });
@@ -35,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Immediately display loader on refresh / page unload (F5, Ctrl+R, reload)
   window.addEventListener('beforeunload', () => {
     if (appLoader) {
-      appLoader.style.display = 'flex';
+      appLoader.style.display = 'grid';
       appLoader.classList.remove('loader-hidden');
     }
   });
@@ -43,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('keydown', (e) => {
     if (e.key === 'F5' || (e.ctrlKey && e.key.toLowerCase() === 'r')) {
       if (appLoader) {
-        appLoader.style.display = 'flex';
+        appLoader.style.display = 'grid';
         appLoader.classList.remove('loader-hidden');
       }
     }
@@ -56,16 +97,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const hidePartModule = new HidePartEditor();
   const standaloneModule = new StandaloneAddonGenerator();
   const wardrobeModule = new WardrobeMultiEditor();
+  initExportSheet();
 
   let currentTab = 'home';
 
-  // 3. Navigation Tabs Switcher (Desktop & Mobile)
-  const tabButtons = document.querySelectorAll('.nav-tab-btn, .mobile-nav-item, .stage-nav-item, .desktop-nav-btn');
+  // 3. Navigation Tabs Switcher (Desktop Sidebar & Mobile Dock)
+  const tabButtons = document.querySelectorAll('.nav-tab-btn, .mobile-nav-item, .stage-nav-item, .desktop-nav-btn, .sidebar-nav-btn');
   const sections = document.querySelectorAll('.page-section');
+  const activeCrumb = document.getElementById('topbar-active-crumb');
+
+  const tabLabels = {
+    home: 'OVERVIEW',
+    hidepart: 'HIDE PART STUDIO',
+    standalone: 'WEARABLE ADDON',
+    wardrobe: 'WARDROBE PACK',
+    guide: 'DOCUMENTATION'
+  };
 
   function switchTab(targetTabId) {
     currentTab = targetTabId;
     sfx.playClick();
+
+    if (activeCrumb) {
+      activeCrumb.textContent = tabLabels[targetTabId] || targetTabId.toUpperCase();
+    }
 
     tabButtons.forEach(btn => {
       const isTarget = btn.dataset.tab === targetTabId || btn.dataset.goto === targetTabId;
@@ -121,6 +176,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // 3.5. Theme Engine (โหมดสว่างสดใส / โหมดมืด)
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const themeIconLight = document.getElementById('theme-icon-light');
+  const themeIconDark = document.getElementById('theme-icon-dark');
+
+  const savedTheme = localStorage.getItem('zirconx-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+  function updateThemeUi(theme) {
+    if (themeIconLight && themeIconDark) {
+      themeIconLight.style.display = theme === 'light' ? 'none' : 'block';
+      themeIconDark.style.display = theme === 'light' ? 'block' : 'none';
+    }
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', theme === 'light' ? '#f5f6fb' : '#070912');
+    }
+  }
+
+  updateThemeUi(savedTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('zirconx-theme', next);
+      updateThemeUi(next);
+      sfx.playClick();
+      showToast(next === 'light' ? 'สลับเป็นโหมดสว่างสดใส' : 'สลับเป็นโหมดมืด', 'info');
+    });
+  }
+
   // 4. Sound Effects (SFX) Toggle
   const sfxToggleBtn = document.getElementById('sfx-toggle-btn');
   const iconOn = document.getElementById('sfx-icon-on');
@@ -154,11 +243,36 @@ document.addEventListener('DOMContentLoaded', () => {
   function setupDropzone(dropzoneEl, onFileDrop) {
     if (!dropzoneEl) return;
 
+    // Click to select file
+    dropzoneEl.addEventListener('click', (e) => {
+      const fileInput = dropzoneEl.querySelector('input[type="file"]');
+      if (fileInput && e.target !== fileInput) {
+        fileInput.value = '';
+        fileInput.click();
+      }
+    });
+
+    // Keyboard accessibility (Enter / Space)
+    dropzoneEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const fileInput = dropzoneEl.querySelector('input[type="file"]');
+        if (fileInput) {
+          fileInput.value = '';
+          fileInput.click();
+        }
+      }
+    });
+
     ['dragenter', 'dragover'].forEach(eventName => {
       dropzoneEl.addEventListener(eventName, (e) => {
         e.preventDefault();
         e.stopPropagation();
         dropzoneEl.classList.add('drag-over');
+        if (eventName === 'dragover' && !dropzoneEl.classList.contains('scanning')) {
+          dropzoneEl.classList.add('scanning');
+          sfx.playScan();
+        }
       });
     });
 
@@ -166,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dropzoneEl.addEventListener(eventName, (e) => {
         e.preventDefault();
         e.stopPropagation();
-        dropzoneEl.classList.remove('drag-over');
+        dropzoneEl.classList.remove('drag-over', 'scanning');
       });
     });
 
