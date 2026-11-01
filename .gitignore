@@ -4,6 +4,8 @@ dist/
 *.local
 .env
 customer_samples/
+.freebuff/
+.tmp*
 desktop.ini
 *.log
 
