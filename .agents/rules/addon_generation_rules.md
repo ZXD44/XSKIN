@@ -20,6 +20,7 @@
   - กำหนด `max_stack_size: 1`
   - **ห้ามใช้คอมโพเนนต์ Deprecated**: ห้ามใช้ `minecraft:armor` และ `minecraft:render_offsets` (ยกเลิกแล้วในเวอร์ชันใหม่)
   - **Unbreakable**: ห้ามใส่ `minecraft:durability` เพื่อให้ไอเทมไม่มีวันพังเสียหาย
+  - **Anti-Clipping Armor Offset**: ในไฟล์โมเดล Humanoid Geometry (`humanoid_custom.geo.json`) รองรับการกำหนด `inflateOffset` (+0.05) สำหรับเลเยอร์ในและเลเยอร์นอกของไอเทมเสื้อผ้า เพื่อให้สวมคลุมอยู่ชั้นนอกตัวละคร ป้องกันการเกิด Z-Fighting หรือเนื้อสกินแลบทะลุ
 - **In-Hand Scale Glitch Prevention**:
   - เมื่อถือไอเทมในมือ ให้ตั้งสเกลเป็นขนาดจิ๋ว `1e-5` ใน attachable เพื่อซ่อนไม่ให้มีโมเดลลอยเกะกะในมุมมองบุคคลที่ 1 หรือ 3
 

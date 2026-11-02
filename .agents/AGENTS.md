@@ -90,7 +90,14 @@
 
 ## 📝 บันทึกประวัติการปรับปรุงระบบ (Update Logs & Changelog)
 
-### v1.7.1 (ล่าสุด - 1 พฤศจิกายน 2026)
+### v1.7.2 (ล่าสุด - 2 พฤศจิกายน 2026)
+- **Anti-Clipping Armor Offset**: เพิ่มตัวเลือกระบบขยายสเกลโมเดล `geometry.humanoid.custom` (+0.05) สำหรับเสื้อผ้าแอดออน สวมคลุมอยู่ชั้นนอกตัวละคร ป้องกันการเกิด Z-Fighting หรือเนื้อสกินแลบทะลุเสื้อผ้า
+- **Skin Pack Export (.mcpack) in Hide Part Editor**: เพิ่มตัวเลือกดาวน์โหลดสกินล่องหนเป็น Official Bedrock Skin Pack (.mcpack) นำเข้าห้องแต่งตัว (Dressing Room) โดยตรง ตัวเกม Bedrock ยอมรับความโปร่งใส ไม่ถูกถมดำ
+- **Smart Slot Anti-Overlap**: ปรับค่าเริ่มต้นของช่องหมวก (Head) ไม่พ่วงส่วนลำตัว (Body) ซ้ำซ้อนกับเสื้อผ้าเมื่อสวมใส่คู่กัน
+- **Default Light Theme**: ปรับค่าเริ่มต้นของทั้งเว็บเป็นโหมดสว่างสดใส (Daylight Theme) พร้อม Script ดักเคลียร์แคช LocalStorage เก่าอัตโนมัติ และอัปเดต Service Worker v1.7.4
+- **Clean UI Typography**: ลบอีโมจิรบกวนสายตาในปุ่มและหัวข้อควบคุม คงความเรียบหรู คมชัด ระดับ Impeccable Style
+
+### v1.7.1 (1 พฤศจิกายน 2026)
 - **Universal Dropzone & Multi-Format**: ปรับปรุง Hidepart Dropzone ให้คลิกเปิด File Picker ได้ทันที รองรับครบทั้งภาพ (.png, .jpg, .jpeg, .webp, MIME image/*) และแพ็กเกจ (.zip, .mcpack, .mcaddon) พร้อม Scan Beam FX และแปะสกินด้วย Ctrl+V
 - **Slot Icon Live Card as Single Source of Truth**: ลบแถว `icon-preview-row` ที่ซ้ำซ้อนออก และผสานปุ่มลบ/รีเซ็ตไอคอนเข้ากับ `slot-icon-live-card`
 - **Short & Distinct Showcase Badges**: แก้ไขป้ายกำกับใน Hero Showcase ให้สั้นกระชับ แยกเป็น `Bedrock` (Titlebar) และ `3D Preview` (มุมจอ 3D) ป้องกันความสับสน
