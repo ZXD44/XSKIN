@@ -41,4 +41,14 @@ describe('Standard Bedrock Humanoid Geometry Generator', () => {
     expect(steve.description.identifier).toBe('geometry.humanoid.custom');
     expect(alex.description.identifier).toBe('geometry.humanoid.customSlim');
   });
+
+  it('supports anti-clipping inflation offset to prevent z-fighting with player skin', () => {
+    const bonesWithOffset = getHumanoidBones(false, 0.05);
+    const body = bonesWithOffset.find(b => b.name === 'body');
+
+    // Inner layer has 0.05 offset
+    expect(body.cubes[0].inflate).toBe(0.05);
+    // Outer layer has 0.25 + 0.05 = 0.3 offset
+    expect(body.cubes[1].inflate).toBe(0.3);
+  });
 });

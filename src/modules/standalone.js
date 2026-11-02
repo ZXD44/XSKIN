@@ -63,6 +63,8 @@ export class StandaloneAddonGenerator {
   set autofixEnabled(v) { this.state.autofixEnabled = v; }
   get isAlphaInferred() { return this.state.isAlphaInferred; }
   set isAlphaInferred(v) { this.state.isAlphaInferred = v; }
+  get antiClippingEnabled() { return this.state.antiClippingEnabled; }
+  set antiClippingEnabled(v) { this.state.antiClippingEnabled = v; }
 
   get viewer() {
     return this.viewerController?.viewer || null;
@@ -368,7 +370,8 @@ export class StandaloneAddonGenerator {
         modelType: this.modelType,
         customGeometryJson: this.customGeometryJson,
         items,
-        packIconData
+        packIconData,
+        antiClippingOffset: this.antiClippingEnabled ? 0.05 : 0
       });
 
       // 2. Pre-Export Validation (CORE-002)

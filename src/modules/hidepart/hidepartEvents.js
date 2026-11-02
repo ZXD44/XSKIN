@@ -97,14 +97,19 @@ export function bindHidepartEvents(editor) {
     });
   }
 
-  // 8. Download Skin PNG
+  // 8. Download Skin (.mcpack & .png)
+  const downloadMcpackBtn = document.getElementById('hidepart-download-mcpack-btn');
+  if (downloadMcpackBtn) {
+    downloadMcpackBtn.addEventListener('click', () => editor.downloadSkinPackMcpack());
+  }
+
   const downloadPngBtn = document.getElementById('hidepart-download-png-btn');
   if (downloadPngBtn) {
     downloadPngBtn.addEventListener('click', () => editor.downloadSkinPng());
   }
 
   const downloadBtn = document.getElementById('hidepart-download-btn');
-  if (downloadBtn && !downloadPngBtn) {
-    downloadBtn.addEventListener('click', () => editor.downloadSkinPng());
+  if (downloadBtn && !downloadPngBtn && !downloadMcpackBtn) {
+    downloadBtn.addEventListener('click', () => editor.downloadSkinPackMcpack());
   }
 }

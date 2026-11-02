@@ -2,10 +2,13 @@
  * Hide Part Editor (ระบบสร้างสกินล่องหน)
  * Clean Architecture Orchestrator
  */
-import { processSkinResolution, detectSlimModel, showToast } from './utils.js';
+import { processSkinResolution, detectSlimModel, showToast, downloadMcpackFile } from './utils.js';
 import { isZipArchive, extractSkinFromArchive } from './zip.js';
 import { sfx } from './sfx.js';
 import { getPartUVRectangles, applyPartClippingToContext } from '../core/skin/skinProcessor.js';
+import { createSkinPack } from '../core/wardrobe/wardrobeGenerator.js';
+import { validateAddonPackage } from '../core/validator/addonValidator.js';
+import { showExportSheet } from './exportSheet.js';
 import { HIDEPART_PRESETS } from '../config/hidepart.config.js';
 import { HidepartViewerController } from './hidepart/hidepartViewer.js';
 import { bindHidepartEvents } from './hidepart/hidepartEvents.js';
@@ -222,5 +225,53 @@ export class HidePartEditor {
 
     sfx.playLevelUp();
     showToast('ดาวน์โหลดไฟล์สกิน (.png) เรียบร้อยแล้ว', 'success');
+  }
+
+  async downloadSkinPackMcpack() {
+    if (!this.currentSkinBlobUrl || !this.canvas) {
+      showToast('กรุณาอัปโหลดสกินก่อนดาวน์โหลด', 'error');
+      return;
+    }
+
+    try {
+      showToast('กำลังแพ็กสกินล่องหนเป็น .mcpack...', 'info');
+
+      const blob = await new Promise((resolve) => this.canvas.toBlob(resolve, 'image/png'));
+      if (!blob) {
+        showToast('ไม่สามารถสร้างรูปภาพสกินได้', 'error');
+        return;
+      }
+
+      const packName = 'XSKIN_Invis_Pack';
+      const skinName = 'สกินล่องหน (Invisible Skin)';
+
+      const generated = await createSkinPack({
+        packName,
+        version: [1, 0, 0],
+        description: 'สกินล่องหนสำหรับห้องแต่งตัว Bedrock สร้างโดย XSKIN Studio',
+        skins: [
+          {
+            id: 'invis_skin',
+            name: skinName,
+            model: this.modelType === 'alex' ? 'alex' : 'steve',
+            blob
+          }
+        ]
+      });
+
+      const validation = await validateAddonPackage(generated.zip);
+      if (!validation.valid) {
+        showToast(`ตรวจสอบพบข้อผิดพลาด: ${validation.errors[0]}`, 'error');
+        return;
+      }
+
+      const exported = await downloadMcpackFile(generated.zip, packName);
+      sfx.playLevelUp();
+      showToast('✓ ดาวน์โหลดสกินแพ็กล่องหน (.mcpack) เรียบร้อย! นำเข้าห้องแต่งตัวได้ทันทีโดยไม่ติดกล่องดำ', 'success');
+      showExportSheet({ ...exported, kind: 'mcpack' });
+    } catch (err) {
+      console.error(err);
+      showToast(err.userMessage || err.message || 'เกิดข้อผิดพลาดในการสร้างสกินแพ็ก', 'error');
+    }
   }
 }

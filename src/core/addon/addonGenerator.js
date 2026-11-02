@@ -43,6 +43,7 @@ export function generateDeterministicId(name, suffix) {
  * @param {Object} [options.customGeometryJson]
  * @param {Array<{ id?: string, name: string, slot: string, group: string, skinData: Blob|ArrayBuffer|Uint8Array, iconData?: Blob|ArrayBuffer|Uint8Array, isHead?: boolean }>} options.items
  * @param {Blob|ArrayBuffer|Uint8Array} [options.packIconData]
+ * @param {boolean|number} [options.antiClippingOffset=0] optional inflation offset (e.g. 0.05) to prevent z-fighting with player skin
  * @param {string} [options.bpUuid] optional explicit UUID for deterministic testing
  * @param {string} [options.rpUuid] optional explicit UUID for deterministic testing
  * @returns {Promise<{ zip: JSZip, bpFolder: string, rpFolder: string, bpUuid: string, rpUuid: string }>}
@@ -57,6 +58,7 @@ export async function createStandaloneSkinAddon(options) {
     customGeometryJson = null,
     items = [],
     packIconData = null,
+    antiClippingOffset = 0,
     bpUuid = generateUUID(),
     rpUuid = generateUUID()
   } = options;
@@ -218,7 +220,8 @@ export async function createStandaloneSkinAddon(options) {
 
   // 6. Geometry definitions (Standard Bedrock Humanoid for Steve & Alex + Custom if present)
   // Ensures Minecraft Bedrock 1.21.x can resolve attachable geometry without black box paperdoll crashes
-  zip.file(`${rpFolder}/models/entity/humanoid_custom.geo.json`, JSON.stringify(getStandardHumanoidGeometryJson(), null, 2));
+  const numOffset = antiClippingOffset === true ? 0.05 : (typeof antiClippingOffset === 'number' ? antiClippingOffset : 0);
+  zip.file(`${rpFolder}/models/entity/humanoid_custom.geo.json`, JSON.stringify(getStandardHumanoidGeometryJson(numOffset), null, 2));
 
   if (customGeometryJson) {
     const geoFileName = geometryIdentifier.replace(/^geometry\./, '') + '.geo.json';

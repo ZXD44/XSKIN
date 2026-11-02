@@ -147,4 +147,33 @@ describe('Addon Generator Core (Headless)', () => {
     const report = await validateAddonPackage(result.zip);
     expect(report.valid).toBe(true);
   });
+
+  it('embeds anti-clipping humanoid geometry when antiClippingOffset is enabled', async () => {
+    const fakePng = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]);
+    const result = await createStandaloneSkinAddon({
+      addonName: 'KnightSuit',
+      itemName: 'Knight Plate',
+      antiClippingOffset: true, // Should use 0.05
+      items: [
+        {
+          id: 'skin_knight_001',
+          name: 'Knight Plate',
+          slot: 'slot.armor.chest',
+          group: 'itemGroup.name.chestplate',
+          skinData: fakePng,
+          iconData: fakePng,
+          isHead: false
+        }
+      ]
+    });
+
+    const geoFile = result.zip.file(`${result.rpFolder}/models/entity/humanoid_custom.geo.json`);
+    expect(geoFile).not.toBeNull();
+    const geoJson = JSON.parse(await geoFile.async('string'));
+    const steveBones = geoJson['minecraft:geometry'][0].bones;
+    const bodyBone = steveBones.find(b => b.name === 'body');
+
+    expect(bodyBone.cubes[0].inflate).toBe(0.05);
+    expect(bodyBone.cubes[1].inflate).toBe(0.3);
+  });
 });

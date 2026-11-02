@@ -26,7 +26,7 @@ export const BEDROCK_ARMOR_SLOTS = {
     name: 'หมวก (Head)',
     slot: 'slot.armor.head',
     group: 'itemGroup.name.helmet',
-    defaultParts: { head: true, body: true, arms: false, legs: false }
+    defaultParts: { head: true, body: false, arms: false, legs: false }
   },
   suit: {
     id: 'suit',

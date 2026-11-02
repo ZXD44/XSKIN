@@ -26,6 +26,7 @@ export class StandaloneState {
     this.rawInputImg = null;
     this.autofixEnabled = true;
     this.isAlphaInferred = false;
+    this.antiClippingEnabled = true;
   }
 
   /**

@@ -4,12 +4,30 @@
  * for wearable attachables, ensuring 100% compatibility without black box glitches.
  */
 
-export function getHumanoidBones(isSlim = false) {
+export function getHumanoidBones(isSlim = false, inflateOffset = 0) {
   const armWidth = isSlim ? 3 : 4;
   const armPivotX = 5;
   const armPivotY = isSlim ? 21.5 : 22;
   const rightArmOriginX = isSlim ? -7 : -8;
   const leftArmOriginX = 4;
+
+  const innerBody = { origin: [-4, 12, -2], size: [8, 12, 4], uv: [16, 16] };
+  if (inflateOffset > 0) innerBody.inflate = +inflateOffset.toFixed(3);
+
+  const innerHead = { origin: [-4, 24, -4], size: [8, 8, 8], uv: [0, 0] };
+  if (inflateOffset > 0) innerHead.inflate = +inflateOffset.toFixed(3);
+
+  const innerRightArm = { origin: [rightArmOriginX, 12, -2], size: [armWidth, 12, 4], uv: [40, 16] };
+  if (inflateOffset > 0) innerRightArm.inflate = +inflateOffset.toFixed(3);
+
+  const innerLeftArm = { origin: [leftArmOriginX, 12, -2], size: [armWidth, 12, 4], uv: [32, 48] };
+  if (inflateOffset > 0) innerLeftArm.inflate = +inflateOffset.toFixed(3);
+
+  const innerRightLeg = { origin: [-3.9, 0, -2], size: [4, 12, 4], uv: [0, 16] };
+  if (inflateOffset > 0) innerRightLeg.inflate = +inflateOffset.toFixed(3);
+
+  const innerLeftLeg = { origin: [-0.1, 0, -2], size: [4, 12, 4], uv: [16, 48] };
+  if (inflateOffset > 0) innerLeftLeg.inflate = +inflateOffset.toFixed(3);
 
   return [
     { name: 'root', pivot: [0, 0, 0] },
@@ -19,8 +37,8 @@ export function getHumanoidBones(isSlim = false) {
       parent: 'waist',
       pivot: [0, 24, 0],
       cubes: [
-        { origin: [-4, 12, -2], size: [8, 12, 4], uv: [16, 16] },
-        { origin: [-4, 12, -2], size: [8, 12, 4], inflate: 0.25, uv: [16, 32] }
+        innerBody,
+        { origin: [-4, 12, -2], size: [8, 12, 4], inflate: +(0.25 + inflateOffset).toFixed(3), uv: [16, 32] }
       ]
     },
     {
@@ -28,7 +46,7 @@ export function getHumanoidBones(isSlim = false) {
       parent: 'body',
       pivot: [0, 24, 0],
       cubes: [
-        { origin: [-4, 24, -4], size: [8, 8, 8], uv: [0, 0] }
+        innerHead
       ]
     },
     {
@@ -36,7 +54,7 @@ export function getHumanoidBones(isSlim = false) {
       parent: 'head',
       pivot: [0, 24, 0],
       cubes: [
-        { origin: [-4, 24, -4], size: [8, 8, 8], inflate: 0.5, uv: [32, 0] }
+        { origin: [-4, 24, -4], size: [8, 8, 8], inflate: +(0.5 + inflateOffset).toFixed(3), uv: [32, 0] }
       ]
     },
     {
@@ -44,8 +62,8 @@ export function getHumanoidBones(isSlim = false) {
       parent: 'body',
       pivot: [-armPivotX, armPivotY, 0],
       cubes: [
-        { origin: [rightArmOriginX, 12, -2], size: [armWidth, 12, 4], uv: [40, 16] },
-        { origin: [rightArmOriginX, 12, -2], size: [armWidth, 12, 4], inflate: 0.25, uv: [40, 32] }
+        innerRightArm,
+        { origin: [rightArmOriginX, 12, -2], size: [armWidth, 12, 4], inflate: +(0.25 + inflateOffset).toFixed(3), uv: [40, 32] }
       ]
     },
     {
@@ -53,8 +71,8 @@ export function getHumanoidBones(isSlim = false) {
       parent: 'body',
       pivot: [armPivotX, armPivotY, 0],
       cubes: [
-        { origin: [leftArmOriginX, 12, -2], size: [armWidth, 12, 4], uv: [32, 48] },
-        { origin: [leftArmOriginX, 12, -2], size: [armWidth, 12, 4], inflate: 0.25, uv: [48, 48] }
+        innerLeftArm,
+        { origin: [leftArmOriginX, 12, -2], size: [armWidth, 12, 4], inflate: +(0.25 + inflateOffset).toFixed(3), uv: [48, 48] }
       ]
     },
     {
@@ -62,8 +80,8 @@ export function getHumanoidBones(isSlim = false) {
       parent: 'root',
       pivot: [-1.9, 12, 0],
       cubes: [
-        { origin: [-3.9, 0, -2], size: [4, 12, 4], uv: [0, 16] },
-        { origin: [-3.9, 0, -2], size: [4, 12, 4], inflate: 0.25, uv: [0, 32] }
+        innerRightLeg,
+        { origin: [-3.9, 0, -2], size: [4, 12, 4], inflate: +(0.25 + inflateOffset).toFixed(3), uv: [0, 32] }
       ]
     },
     {
@@ -71,8 +89,8 @@ export function getHumanoidBones(isSlim = false) {
       parent: 'root',
       pivot: [1.9, 12, 0],
       cubes: [
-        { origin: [-0.1, 0, -2], size: [4, 12, 4], uv: [16, 48] },
-        { origin: [-0.1, 0, -2], size: [4, 12, 4], inflate: 0.25, uv: [0, 48] }
+        innerLeftLeg,
+        { origin: [-0.1, 0, -2], size: [4, 12, 4], inflate: +(0.25 + inflateOffset).toFixed(3), uv: [0, 48] }
       ]
     }
   ];
@@ -80,8 +98,9 @@ export function getHumanoidBones(isSlim = false) {
 
 /**
  * Returns complete Bedrock 1.12.0+ geometry containing both Steve and Alex models
+ * @param {number} [inflateOffset=0] optional inflation offset (e.g. 0.05) to prevent z-fighting with player skin
  */
-export function getStandardHumanoidGeometryJson() {
+export function getStandardHumanoidGeometryJson(inflateOffset = 0) {
   return {
     format_version: '1.12.0',
     'minecraft:geometry': [
@@ -94,7 +113,7 @@ export function getStandardHumanoidGeometryJson() {
           visible_bounds_height: 3,
           visible_bounds_offset: [0, 1.5, 0]
         },
-        bones: getHumanoidBones(false)
+        bones: getHumanoidBones(false, inflateOffset)
       },
       {
         description: {
@@ -105,7 +124,7 @@ export function getStandardHumanoidGeometryJson() {
           visible_bounds_height: 3,
           visible_bounds_offset: [0, 1.5, 0]
         },
-        bones: getHumanoidBones(true)
+        bones: getHumanoidBones(true, inflateOffset)
       }
     ]
   };

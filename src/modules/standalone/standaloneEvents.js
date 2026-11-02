@@ -112,6 +112,25 @@ export function bindStandaloneEvents(controller) {
     }
   });
 
+  // Anti-clipping offset toggle
+  const antiClippingCheckbox = document.getElementById('standalone-anticlipping-checkbox');
+  if (antiClippingCheckbox) {
+    antiClippingCheckbox.addEventListener('change', (e) => {
+      controller.antiClippingEnabled = e.target.checked;
+      const parent = antiClippingCheckbox.closest('.part-toggle-item');
+      if (parent) {
+        parent.classList.toggle('checked', e.target.checked);
+      }
+      sfx.playClick();
+      showToast(
+        e.target.checked
+          ? 'เปิดโหมดสวมทับ (ขยายเกราะ +0.05 ป้องกันการซ้อน) 🛡️'
+          : 'ปิดโหมดสวมทับ (ใช้ขนาด 1:1 แนบเนื้อ)',
+        'info'
+      );
+    });
+  }
+
   // Quick Presets for Standalone (Independent part toggle)
   document.querySelectorAll('.standalone-preset-btn').forEach((btn) => {
     btn.addEventListener('click', () => {

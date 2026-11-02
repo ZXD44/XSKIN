@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeIconLight = document.getElementById('theme-icon-light');
   const themeIconDark = document.getElementById('theme-icon-dark');
 
-  const savedTheme = localStorage.getItem('zirconx-theme') || 'dark';
+  const savedTheme = localStorage.getItem('zirconx-theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
 
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');

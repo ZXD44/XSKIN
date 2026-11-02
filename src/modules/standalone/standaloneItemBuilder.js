@@ -43,8 +43,8 @@ export async function buildAddonItems({
   const slotMap = BEDROCK_ARMOR_SLOTS;
 
   if (itemSlotType === 'both') {
-    const headSkinBlob = await createSkinBlobFn({ head: true, body: parts.body, arms: false, legs: false });
-    const headIconBlob = await generateSlotItemIconBlob(skinImg, skinResolution, { head: true, body: parts.body }, 'head');
+    const headSkinBlob = await createSkinBlobFn({ head: true, body: false, arms: false, legs: false });
+    const headIconBlob = await generateSlotItemIconBlob(skinImg, skinResolution, { head: true, body: false }, 'head');
     items.push({
       id: `${baseItemId}_head`,
       name: `${itemName} (หัว)`,
