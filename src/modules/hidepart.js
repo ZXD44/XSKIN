@@ -267,7 +267,7 @@ export class HidePartEditor {
 
       const exported = await downloadMcpackFile(generated.zip, packName);
       sfx.playLevelUp();
-      showToast('✓ ดาวน์โหลดสกินแพ็กล่องหน (.mcpack) เรียบร้อย! นำเข้าห้องแต่งตัวได้ทันทีโดยไม่ติดกล่องดำ', 'success');
+      showToast('ดาวน์โหลดสกินแพ็ก (.mcpack) เรียบร้อยแล้ว', 'success');
       showExportSheet({ ...exported, kind: 'mcpack' });
     } catch (err) {
       console.error(err);
