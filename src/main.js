@@ -181,7 +181,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeIconLight = document.getElementById('theme-icon-light');
   const themeIconDark = document.getElementById('theme-icon-dark');
 
-  const savedTheme = localStorage.getItem('zirconx-theme') || 'light';
+  let savedTheme = localStorage.getItem('xskin-theme-mode');
+  if (!savedTheme) {
+    savedTheme = 'light';
+    localStorage.setItem('xskin-theme-mode', 'light');
+    localStorage.removeItem('zirconx-theme');
+  }
   document.documentElement.setAttribute('data-theme', savedTheme);
 
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
@@ -203,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       const next = current === 'light' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('zirconx-theme', next);
+      localStorage.setItem('xskin-theme-mode', next);
       updateThemeUi(next);
       sfx.playClick();
       showToast(next === 'light' ? 'สลับเป็นโหมดสว่างสดใส' : 'สลับเป็นโหมดมืด', 'info');
